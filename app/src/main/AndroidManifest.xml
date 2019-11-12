@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UpcomingTrips"></activity>
+        <activity android:name=".AlternativeTravel"></activity>
+        <activity android:name=".MatchInProgress" />
+        <activity android:name=".ConfirmTrip" />
+        <activity android:name=".Chat" />
+        <activity android:name=".MatchedTripSummary" />
+        <activity android:name=".UpcomingTrips" />
         <activity android:name=".TravelSaveTrip" />
         <activity android:name=".TravelReturnTrip" />
         <activity android:name=".TravelRoundTripQuestion" />
