@@ -9,6 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".UpcomingTrips"></activity>
+        <activity android:name=".TravelSaveTrip" />
+        <activity android:name=".TravelReturnTrip" />
+        <activity android:name=".TravelRoundTripQuestion" />
+        <activity android:name=".TravelOneWay" />
+        <activity android:name=".StartPage" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
