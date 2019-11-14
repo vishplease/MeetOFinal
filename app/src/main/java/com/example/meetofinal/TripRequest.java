@@ -13,7 +13,7 @@ public class TripRequest {
     }
 
     public TripRequest(String rider, String startLocation, String endLocation, Timestamp requestedTime, int handBag, int carryOn, int checkIn, boolean status) {
-        rider = rider;
+        this.rider = rider;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.requestedTime = requestedTime;

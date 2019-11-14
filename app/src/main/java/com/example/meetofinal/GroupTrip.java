@@ -5,14 +5,13 @@ import java.util.ArrayList;
 
 public class GroupTrip {
     public String[] tripRequests;
-  //  public ArrayList TripRequests;
     public Timestamp confirmedTime;
 
     public GroupTrip() {
     }
 
-    public GroupTrip(ArrayList tripRequests, Timestamp confirmedTime) {
-        tripRequests = tripRequests;
-        confirmedTime = confirmedTime;
+    public GroupTrip(String[] tripRequests, Timestamp confirmedTime) {
+        this.tripRequests = tripRequests;
+        this.confirmedTime = confirmedTime;
     }
 }
