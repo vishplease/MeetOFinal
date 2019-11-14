@@ -4,14 +4,15 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class GroupTrip {
-    public ArrayList TripRequests;
-    public Timestamp ConfirmedTime;
+    public String[] tripRequests;
+  //  public ArrayList TripRequests;
+    public Timestamp confirmedTime;
 
     public GroupTrip() {
     }
 
     public GroupTrip(ArrayList tripRequests, Timestamp confirmedTime) {
-        TripRequests = tripRequests;
-        ConfirmedTime = confirmedTime;
+        tripRequests = tripRequests;
+        confirmedTime = confirmedTime;
     }
 }
