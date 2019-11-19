@@ -3,6 +3,7 @@ package com.example.meetofinal626;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -55,8 +57,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        } else if (v == buttonLogIn);
-
+        } else if (v == buttonLogIn){
+            loginNewUsers(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+        }
 
     }
 
@@ -73,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, "Registration Failed. Try Again.", Toast.LENGTH_SHORT).show();
-
-
                         }
 
                     }
@@ -84,8 +85,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void loginNewUsers (String email, String password){
-
-
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Take user to Upcoming Trips Activity when login is successful
+                            Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(MainActivity.this, "Login Failed. Try Again.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     public void loginSuccess () {
