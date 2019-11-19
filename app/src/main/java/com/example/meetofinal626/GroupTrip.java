@@ -1,7 +1,6 @@
-package com.example.meetofinal;
+package com.example.meetofinal626;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 public class GroupTrip {
     public String[] tripRequests;

@@ -1,14 +1,14 @@
-package com.example.meetofinal;
+package com.example.meetofinal626;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class TravelSaveTrip extends AppCompatActivity {
+public class MatchInProgress extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_travel_save_trip);
+        setContentView(R.layout.activity_match_in_progress);
     }
 }

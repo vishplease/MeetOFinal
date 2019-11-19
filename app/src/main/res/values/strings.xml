@@ -1,3 +1,15 @@
 <resources>
-    <string name="app_name">MeetOFinal</string>
+    <string name="app_name">Meet-O</string>
+
+    <string name="emailhint">Enter Email</string>
+
+    <string name="passwordhint">Enter Password</string>
+
+    <string name="loginbutton">Log In and Save Trip</string>
+
+    <string name="registerbutton">Register</string>
+
+    <string name="loginmessage">Looks like you are not logged in yet. Register and/or sign in to save your trip.</string>
+
+
 </resources>

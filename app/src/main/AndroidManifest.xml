@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.meetofinal">
+    package="com.example.meetofinal626">
 
     <application
         android:allowBackup="true"
@@ -9,18 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AlternativeTravel"></activity>
-        <activity android:name=".MatchInProgress" />
-        <activity android:name=".ConfirmTrip" />
-        <activity android:name=".Chat" />
-        <activity android:name=".MatchedTripSummary" />
-        <activity android:name=".UpcomingTrips" />
-        <activity android:name=".TravelSaveTrip" />
-        <activity android:name=".TravelReturnTrip" />
-        <activity android:name=".TravelRoundTripQuestion" />
-        <activity android:name=".TravelOneWay" />
-        <activity android:name=".StartPage" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.meetofinal626.AlternativeTravel"></activity>
+        <activity android:name="com.example.meetofinal626.MatchInProgress" />
+        <activity android:name="com.example.meetofinal626.ConfirmTrip" />
+        <activity android:name="com.example.meetofinal626.Chat" />
+        <activity android:name="com.example.meetofinal626.MatchedTripSummary" />
+        <activity android:name="com.example.meetofinal626.UpcomingTrips" />
+        <activity android:name="com.example.meetofinal626.TravelSaveTrip" />
+        <activity android:name="com.example.meetofinal626.TravelReturnTrip" />
+        <activity android:name="com.example.meetofinal626.TravelRoundTripQuestion" />
+        <activity android:name="com.example.meetofinal626.TravelOneWay" />
+        <activity android:name="com.example.meetofinal626.StartPage" />
+        <activity android:name="com.example.meetofinal626.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

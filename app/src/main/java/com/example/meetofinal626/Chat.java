@@ -1,14 +1,14 @@
-package com.example.meetofinal;
+package com.example.meetofinal626;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class TravelOneWay extends AppCompatActivity {
+public class Chat extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_travel_one_way);
+        setContentView(R.layout.activity_chat);
     }
 }

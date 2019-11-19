@@ -1,4 +1,4 @@
-package com.example.meetofinal;
+package com.example.meetofinal626;
 
 import androidx.appcompat.app.AppCompatActivity;
 
