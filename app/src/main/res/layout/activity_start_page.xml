@@ -6,4 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".StartPage">
 
+    <Button
+        android:id="@+id/buttonGetStarted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Started"
+        tools:layout_editor_absoluteX="145dp"
+        tools:layout_editor_absoluteY="488dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

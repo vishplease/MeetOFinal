@@ -19,8 +19,8 @@
         <activity android:name="com.example.meetofinal626.TravelReturnTrip" />
         <activity android:name="com.example.meetofinal626.TravelRoundTripQuestion" />
         <activity android:name="com.example.meetofinal626.TravelOneWay" />
-        <activity android:name="com.example.meetofinal626.StartPage" />
-        <activity android:name="com.example.meetofinal626.MainActivity">
+        <activity android:name="com.example.meetofinal626.MainActivity" />
+        <activity android:name="com.example.meetofinal626.StartPage">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
