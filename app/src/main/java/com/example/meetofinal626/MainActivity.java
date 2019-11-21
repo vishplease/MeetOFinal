@@ -52,9 +52,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         if (v == buttonRegister) {
-
+            if(editTextEmail.getText().toString().isEmpty() || editTextPassword.getText().toString().isEmpty()){
+                Toast.makeText(MainActivity.this, "Please enter a valid email and password", Toast.LENGTH_SHORT).show();
+            }
+            else {
                 makeNewUsers(editTextEmail.getText().toString(), editTextPassword.getText().toString());
-
+            }
 
 
         } else if (v == buttonLogIn){
