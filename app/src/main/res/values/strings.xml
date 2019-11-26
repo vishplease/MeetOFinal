@@ -11,5 +11,21 @@
 
     <string name="loginmessage">Looks like you are not logged in yet. Register and/or sign in to save your trip.</string>
 
+    <string name="onewayheader">I need a ride from:</string>
+
+    <string name="to">to</string>
+
+    <string name="travelquestion">When are you traveling?</string>
+
+    <string name="selectdate">Select Date</string>
+
+    <string name="selecttime">Select Time</string>
+
+    <string name="gettodtw">What time do you want to get to DTW?</string>
+
+    <string name="leavefromdtw">What time do you want to leave from DTW?</string>
+
+    <string name="luggagequestion">What luggage are you traveling with?</string>
+
 
 </resources>

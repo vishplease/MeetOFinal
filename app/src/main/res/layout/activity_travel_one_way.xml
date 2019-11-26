@@ -7,11 +7,84 @@
     tools:context=".TravelOneWay">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="I need a ride from"
-        app:layout_constraintBottom_toTopOf="@+id/buttonNext"
+        android:id="@+id/textViewOneWayHeader3"
+        android:layout_width="357dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/travelquestion"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <TextView
+        android:id="@+id/textViewOneWayHeader4"
+        android:layout_width="368dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/gettodtw"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelectDate" />
+
+    <TextView
+        android:id="@+id/textViewOneWayHeader5"
+        android:layout_width="375dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/luggagequestion"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <TextView
+        android:id="@+id/textViewOneWayHeader2"
+        android:layout_width="50dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/to"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerOrigin"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerDestination"
+        app:layout_constraintStart_toEndOf="@+id/spinnerOrigin"
+        app:layout_constraintTop_toTopOf="@+id/spinnerOrigin"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/spinnerDestination"
+        android:layout_width="109dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerOrigin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/spinnerOrigin" />
+
+    <TextView
+        android:id="@+id/textViewOneWayHeader"
+        android:layout_width="339dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/onewayheader"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,5 +97,116 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewCarryOn" />
+
+    <Spinner
+        android:id="@+id/spinnerOrigin"
+        android:layout_width="109dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOneWayHeader" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerOrigin" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelectTime" />
+
+    <TextView
+        android:id="@+id/textViewSelectDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/selectdate"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOneWayHeader3" />
+
+    <TextView
+        android:id="@+id/textViewSelectTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="@string/selecttime"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOneWayHeader4" />
+
+    <ImageView
+        android:id="@+id/imageViewCarryOn"
+        android:layout_width="52dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOneWayHeader5"
+        app:srcCompat="@drawable/backpackicon" />
+
+    <Spinner
+        android:id="@+id/spinnerCarryOn"
+        android:layout_width="51dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCarryOn"
+        app:layout_constraintStart_toEndOf="@+id/imageViewCarryOn"
+        app:layout_constraintTop_toTopOf="@+id/imageViewCarryOn"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageViewRollaboard"
+        android:layout_width="43dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewCarryOn"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCarryOn"
+        app:srcCompat="@drawable/rollaboard" />
+
+    <Spinner
+        android:id="@+id/spinnerCarryOn2"
+        android:layout_width="51dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewRollaboard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewRollaboard"
+        app:layout_constraintTop_toTopOf="@+id/imageViewRollaboard"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Spinner
+        android:id="@+id/spinnerCarryOn3"
+        android:layout_width="51dp"
+        android:layout_height="39dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView3"
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="53dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewRollaboard"
+        app:layout_constraintStart_toEndOf="@+id/spinnerCarryOn2"
+        app:srcCompat="@drawable/checkin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
