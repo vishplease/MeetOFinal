@@ -61,7 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         } else if (v == buttonLogIn){
-            loginNewUsers(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+            if(editTextEmail.getText().toString().isEmpty() || editTextPassword.getText().toString().isEmpty()){
+                Toast.makeText(MainActivity.this, "Please enter a valid email and password", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                loginNewUsers(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+            }
         }
 
     }
@@ -73,12 +78,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //display a success message
-                            Toast.makeText(MainActivity.this, "New account created. Please log in with your new account details to save trip.", Toast.LENGTH_SHORT).show();
-
+                            Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
+                            startActivity(intent);
                         } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(MainActivity.this, "Registration Failed. Try Again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(MainActivity.this, "Login Failed. Try Again.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
