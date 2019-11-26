@@ -15,4 +15,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSaveTrip"
+        android:layout_width="391dp"
+        android:layout_height="88dp"
+        android:text="Save your trip and see if other riders are going at the same time as you."
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="183dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

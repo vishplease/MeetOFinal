@@ -18,6 +18,7 @@ public class TravelRoundTripQuestion extends AppCompatActivity implements View.O
 
         buttonYes = findViewById(R.id.buttonYes);
         buttonNo = findViewById(R.id.buttonNo);
+
         buttonYes.setOnClickListener(this);
         buttonNo.setOnClickListener(this);
     }
