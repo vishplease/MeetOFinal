@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,10 +34,11 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         rv.setLayoutManager(llm);
 
         upcomingTrips = new ArrayList<>();
-        upcomingTrips.add(new TripRequest("Angad Banga"));
-        upcomingTrips.add(new TripRequest("Hiraku Ozeki"));
-        upcomingTrips.add(new TripRequest("Rahul Bhardwaj"));
-        upcomingTrips.add(new TripRequest("Vish Chandawarkar"));
+        upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+        upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+        upcomingTrips.add(new TripRequest("Vish", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+        upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+
 
         TripsAdapter adapter = new TripsAdapter(upcomingTrips);
         rv.setAdapter(adapter);
