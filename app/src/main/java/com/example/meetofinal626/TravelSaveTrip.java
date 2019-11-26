@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class TravelSaveTrip extends AppCompatActivity implements View.OnClickListener {
 
     Button buttonSaveTrip;
@@ -22,7 +25,14 @@ public class TravelSaveTrip extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(TravelSaveTrip.this, MainActivity.class);
-        startActivity(intent);
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null) {
+            Intent intent = new Intent(this, UpcomingTrips.class);
+            startActivity(intent);
+        }
+        else {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 }
