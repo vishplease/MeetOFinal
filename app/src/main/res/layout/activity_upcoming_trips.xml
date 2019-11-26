@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".UpcomingTrips">
 
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv"
+        />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonAddTrip"
         android:layout_width="wrap_content"
