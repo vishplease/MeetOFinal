@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +71,19 @@ public class TravelOneWay extends AppCompatActivity implements
         spinnerCarryOn.setOnItemSelectedListener(this);
         spinnerRollaboard.setOnItemSelectedListener(this);
         spinnerCheckIn.setOnItemSelectedListener(this);
+
+        List<String> baggageCount = new ArrayList<>();
+        baggageCount.add("0");
+        baggageCount.add("1");
+        baggageCount.add("2");
+        baggageCount.add("3");
+        baggageCount.add("4");
+
+        ArrayAdapter<String> spinnerAdapterBags = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, baggageCount);
+        spinnerAdapterBags.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCarryOn.setAdapter(spinnerAdapterBags);
+        spinnerRollaboard.setAdapter(spinnerAdapterBags);
+        spinnerCheckIn.setAdapter(spinnerAdapterBags);
     }
 
     @Override
