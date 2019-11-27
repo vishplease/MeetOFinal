@@ -14,11 +14,19 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 public class TravelOneWay extends AppCompatActivity implements
         View.OnClickListener,
@@ -41,6 +49,8 @@ public class TravelOneWay extends AppCompatActivity implements
             spinnerRollaboard,
             spinnerCheckIn;
     Button buttonNext;
+
+    public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("EST"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,21 +112,42 @@ public class TravelOneWay extends AppCompatActivity implements
         spinnerCarryOn.setAdapter(spinnerAdapterBags);
         spinnerRollaboard.setAdapter(spinnerAdapterBags);
         spinnerCheckIn.setAdapter(spinnerAdapterBags);
+        
+
     }
 
     @Override
     public void onClick(View v) {
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference("triprequests");
+
         if (v == buttonNext){
-            Intent intent = new Intent(TravelOneWay.this, TravelRoundTripQuestion.class);
-            startActivity(intent);
+
+            FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+            if(currentUser != null) {
+                Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(TravelOneWay.this, TravelRoundTripQuestion.class);
+                startActivity(intent);
+
+                //upload data to the database and move to next page
+
+
+            }
+            else {
+
+                //add in code to hold data onto next page until registered and saved
+            }
+
+
+
+
         } else if (v == textViewSelectDate){
             showDatePicker();
         } else if (v == textViewSelectTime){
             showTimePicker();
         }
-
-
 
     }
 
@@ -136,7 +167,7 @@ public class TravelOneWay extends AppCompatActivity implements
 
     }
 
-    private void showDatePicker(){
+    public void showDatePicker(){
         DatePickerDialog datePicker = new DatePickerDialog(
                 this, this,
                 Calendar.getInstance().get(Calendar.YEAR),
@@ -148,7 +179,7 @@ public class TravelOneWay extends AppCompatActivity implements
 
     }
 
-    private void showTimePicker(){
+    public void showTimePicker(){
         TimePickerDialog timePick = new TimePickerDialog(
                 this, this,
                 12,
@@ -164,6 +195,8 @@ public class TravelOneWay extends AppCompatActivity implements
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         String date = month + "/" + dayOfMonth + "/" + year;
         textViewSelectDate.setText(date);
+        
+        combinedCal.set(year, month, dayOfMonth);
 
     }
 
@@ -181,10 +214,12 @@ public class TravelOneWay extends AppCompatActivity implements
             amPm = "AM";
         }
 
-        //String time;
-
-                //hour12 + ":" + minutes + " " + amPm;
         textViewSelectTime.setText(String.format("%02d:%02d", hour12, minutes) + " " + amPm);
 
+        combinedCal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        combinedCal.set(Calendar.MINUTE, minutes);
+        
     }
+    
+
 }

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:752126253077:android:1515bccd9f07842c08d61c",
         "android_client_info": {
-          "package_name": "com.example.meetofinal626"
+          "package_name": "com.example.meetofinal"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "752126253077-f7o3nl45fu96o1ilvf02p78k4ke6cdp2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.meetofinal626",
+            "package_name": "com.example.meetofinal",
             "certificate_hash": "01a291bdb353f93db5768ba9993dbecde6bfab75"
           }
         },
@@ -51,6 +51,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "752126253077-6p0tlve1ophk8fblsvb674g40dej9ue1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.meetofinal626",
+            "certificate_hash": "01a291bdb353f93db5768ba9993dbecde6bfab75"
+          }
+        },
         {
           "client_id": "752126253077-um4rlijamsnr5hmv9m5c6ds5s1o5ir9u.apps.googleusercontent.com",
           "client_type": 3
