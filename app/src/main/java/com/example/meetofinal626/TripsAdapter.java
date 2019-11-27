@@ -33,7 +33,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 
 	@Override
 	public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
-		holder.rider.setText(trips.get(position).rider);
+		//holder.rider.setText(trips.get(position).rider);
 	}
 
 	@Override

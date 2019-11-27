@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.lang.reflect.Array;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -49,6 +50,8 @@ public class TravelOneWay extends AppCompatActivity implements
             spinnerRollaboard,
             spinnerCheckIn;
     Button buttonNext;
+
+    public boolean startLocation, endLocation;
 
     public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("EST"));
 
@@ -112,6 +115,8 @@ public class TravelOneWay extends AppCompatActivity implements
         spinnerCarryOn.setAdapter(spinnerAdapterBags);
         spinnerRollaboard.setAdapter(spinnerAdapterBags);
         spinnerCheckIn.setAdapter(spinnerAdapterBags);
+
+
         
 
     }
@@ -125,16 +130,45 @@ public class TravelOneWay extends AppCompatActivity implements
         if (v == buttonNext){
 
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-            if(currentUser != null) {
-                Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
 
+            //if user is logged in
+            if(currentUser != null) {
+                //Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
+
+
+                //upload data to the database
+
+                //get data and format properly
+                FirebaseUser createRider = currentUser;
+                boolean createStartLocation = startLocation;
+                boolean createEndLocation = endLocation;
+                Calendar createRequestedTime = combinedCal;
+                Integer createCarryOnCount =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
+                Integer createRollaboardCount =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
+                Integer createCheckInCount =  Integer.parseInt(spinnerCheckIn.getSelectedItem().toString());
+                boolean createStatus = false;
+
+                //create a new TripRequest
+
+                TripRequest createTrip = new TripRequest(createRider,
+                        createStartLocation,
+                        createEndLocation,
+                        createRequestedTime,
+                        createCarryOnCount,
+                        createRollaboardCount,
+                        createCheckInCount,
+                        createStatus);
+
+                //push to database
+
+                myRef.push().setValue(createTrip);
+
+                // move to next page
                 Intent intent = new Intent(TravelOneWay.this, TravelRoundTripQuestion.class);
                 startActivity(intent);
 
-                //upload data to the database and move to next page
-
-
             }
+            //if user is not logged in
             else {
 
                 //add in code to hold data onto next page until registered and saved
@@ -156,8 +190,18 @@ public class TravelOneWay extends AppCompatActivity implements
 
         if (spinnerOrigin.getSelectedItem().toString() == "Ross"){
             spinnerDestination.setSelection(1);
+            //true is Ross, false is DTW
+            startLocation = true;
+            endLocation = false;
+
+
         } else if (spinnerOrigin.getSelectedItem().toString() == "DTW") {
             spinnerDestination.setSelection(0);
+            //true is Ross, false is DTW
+            startLocation = false;
+            endLocation = true;
+
+
         }
 
     }
