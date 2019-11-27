@@ -2,28 +2,34 @@ package com.example.meetofinal626;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class TravelOneWay extends AppCompatActivity implements
         View.OnClickListener,
-        AdapterView.OnItemSelectedListener {
+        AdapterView.OnItemSelectedListener,
+        DatePickerDialog.OnDateSetListener {
 
 
     TextView textViewOneWayHeader,
             textViewTo,
             textViewTravelDate,
+            textViewSelectDate,
             textViewTravelTime,
+            textViewSelectTime,
             textViewLuggageHeader;
 
     Spinner spinnerOrigin,
@@ -39,9 +45,18 @@ public class TravelOneWay extends AppCompatActivity implements
         setContentView(R.layout.activity_travel_one_way);
 
         textViewOneWayHeader =findViewById(R.id.textViewOneWayHeader);
+
         textViewTravelDate = findViewById(R.id.textViewTravelDate);
+
+        textViewSelectDate = findViewById(R.id.textViewSelectDate);
+        textViewSelectDate.setOnClickListener(this);
+
         textViewTo = findViewById(R.id.textViewTo);
+
         textViewTravelTime = findViewById(R.id.textViewTravelTime);
+        textViewSelectTime = findViewById(R.id.textViewSelectTime);
+        textViewSelectTime.setOnClickListener(this);
+
         textViewLuggageHeader = findViewById(R.id.textViewLuggageHeader);
 
         spinnerOrigin = findViewById(R.id.spinnerOrigin);
@@ -88,8 +103,18 @@ public class TravelOneWay extends AppCompatActivity implements
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(TravelOneWay.this, TravelRoundTripQuestion.class);
-        startActivity(intent);
+
+        if (v == buttonNext){
+            Intent intent = new Intent(TravelOneWay.this, TravelRoundTripQuestion.class);
+            startActivity(intent);
+        } else if (v == textViewSelectDate){
+            showDatePicker();
+        } else if (v == textViewSelectTime){
+
+        }
+
+
+
     }
 
     @Override
@@ -105,6 +130,25 @@ public class TravelOneWay extends AppCompatActivity implements
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    private void showDatePicker(){
+        DatePickerDialog datePicker = new DatePickerDialog(
+                this, this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+        );
+
+        datePicker.show();
+
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        String date = month + "/" + dayOfMonth + "/" + year;
+        textViewSelectDate.setText(date);
 
     }
 }
