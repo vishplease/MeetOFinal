@@ -1,4 +1,4 @@
-package com.example.meetofinal626;
+/* package com.example.meetofinal626;
 
 public class Rider {
 
@@ -13,3 +13,6 @@ public class Rider {
         this.password = password;
     }
 }
+
+
+ */
