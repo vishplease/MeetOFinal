@@ -140,8 +140,8 @@ public class TravelOneWay extends AppCompatActivity implements
 
                 //get data and format properly
                 FirebaseUser createRider = currentUser;
-                boolean createStartLocation = startLocation;
-                boolean createEndLocation = endLocation;
+                String createStartLocation = spinnerOrigin.getSelectedItem().toString();
+                String createEndLocation = spinnerDestination.getSelectedItem().toString();
                 Calendar createRequestedTime = combinedCal;
                 Integer createCarryOnCount =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
                 Integer createRollaboardCount =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
@@ -191,15 +191,15 @@ public class TravelOneWay extends AppCompatActivity implements
         if (spinnerOrigin.getSelectedItem().toString() == "Ross"){
             spinnerDestination.setSelection(1);
             //true is Ross, false is DTW
-            startLocation = true;
-            endLocation = false;
+            //startLocation = true;
+            //endLocation = false;
 
 
         } else if (spinnerOrigin.getSelectedItem().toString() == "DTW") {
             spinnerDestination.setSelection(0);
             //true is Ross, false is DTW
-            startLocation = false;
-            endLocation = true;
+            //startLocation = false;
+            //endLocation = true;
 
 
         }
