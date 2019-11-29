@@ -31,8 +31,7 @@ public class AlternativeTravel extends AppCompatActivity implements View.OnClick
             Intent mainIntent = new Intent(AlternativeTravel.this, UpcomingTrips.class);
         }
         if (buttonMFWeb == view) {
-            WebView webView = new WebView(this);
-            setContentView(webView);
+            WebView webView = new WebView(this);setContentView(webView);
             webView.loadUrl("https://www.michiganflyer.com/");
         }
     }
