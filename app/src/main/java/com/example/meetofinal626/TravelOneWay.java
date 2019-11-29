@@ -55,6 +55,8 @@ public class TravelOneWay extends AppCompatActivity implements
 
     public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("EST"));
 
+    public int selectedHour, selectedMinute, selectedMonth, selectedDay, selectedYear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,12 +177,14 @@ public class TravelOneWay extends AppCompatActivity implements
             }
 
 
-
-
         } else if (v == textViewSelectDate){
             showDatePicker();
         } else if (v == textViewSelectTime){
             showTimePicker();
+
+
+
+
         }
 
     }
@@ -212,31 +216,64 @@ public class TravelOneWay extends AppCompatActivity implements
     }
 
     public void showDatePicker(){
-        DatePickerDialog datePicker = new DatePickerDialog(
-                this, this,
-                Calendar.getInstance().get(Calendar.YEAR),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        );
+        if (textViewSelectDate.getText().toString() == ""){
+            DatePickerDialog datePicker = new DatePickerDialog(
+                    this, this,
+                    Calendar.getInstance().get(Calendar.YEAR),
+                    Calendar.getInstance().get(Calendar.MONTH),
+                    Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            );
 
-        datePicker.show();
+            datePicker.show();
+        } else {
+            DatePickerDialog datePicker = new DatePickerDialog(
+                    this, this,
+                    selectedYear,
+                    selectedMonth,
+                    selectedDay);
+
+            datePicker.show();
+
+        }
+
+
 
     }
 
     public void showTimePicker(){
-        TimePickerDialog timePick = new TimePickerDialog(
-                this, this,
-                12,
-                0,
-                false
-        );
 
-        timePick.show();
+        if (textViewSelectTime.getText().toString() == ""){
+            TimePickerDialog timePick = new TimePickerDialog(
+                    this, this,
+                    12,
+                    0,
+                    false
+            );
+
+            timePick.show();
+        } else {
+            TimePickerDialog timePick = new TimePickerDialog(
+                    this, this,
+                    selectedHour,
+                    selectedMinute,
+                    false
+            );
+
+            timePick.show();
+        }
+
+
+
 
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+        selectedYear = year;
+        selectedMonth = month;
+        selectedDay = dayOfMonth;
+
         String date = month + "/" + dayOfMonth + "/" + year;
         textViewSelectDate.setText(date);
         
@@ -249,6 +286,8 @@ public class TravelOneWay extends AppCompatActivity implements
 
         String amPm;
         int hour12;
+        selectedHour = hourOfDay;
+        selectedMinute = minutes;
 
         if (hourOfDay >= 12){
             amPm = "PM";
