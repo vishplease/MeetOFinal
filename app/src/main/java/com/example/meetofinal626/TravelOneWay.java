@@ -146,7 +146,7 @@ public class TravelOneWay extends AppCompatActivity implements
                 Integer createCarryOnCount =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
                 Integer createRollaboardCount =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
                 Integer createCheckInCount =  Integer.parseInt(spinnerCheckIn.getSelectedItem().toString());
-                boolean createStatus = false;
+                String createStatus = "Pending";
 
                 //create a new TripRequest
 

@@ -44,7 +44,7 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         upcomingTrips = new ArrayList<>();
         //Angad here - I am having difficulty understanding how firebase UserID and Calendar classes are stored.  So I don't know how to pull it down into this array. Will chat through it with you all later this weekend
 
-        upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+        //upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));

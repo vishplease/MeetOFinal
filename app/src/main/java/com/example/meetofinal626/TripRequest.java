@@ -12,7 +12,7 @@ public class TripRequest {
     public String startLocation, endLocation;
     public Calendar requestedTime;
     public int handBag, carryOn, checkIn;
-    public boolean status;
+    public String status;
 
     public TripRequest(FirebaseUser rider) {
         this.riderID = rider;
@@ -25,7 +25,7 @@ public class TripRequest {
                        int handBag,
                        int carryOn,
                        int checkIn,
-                       boolean status) {
+                       String status) {
         this.riderID = riderID;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
