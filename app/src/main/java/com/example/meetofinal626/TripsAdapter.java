@@ -47,13 +47,13 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 
 	public static class TripViewHolder extends RecyclerView.ViewHolder {
 		CardView cv;
-		TextView rider;
-		TextView personAge;
+		//TextView rider;
+		//TextView personAge;
 
 		TripViewHolder(View itemView) {
 			super(itemView);
-			cv = (CardView)itemView.findViewById(R.id.cv);
-			rider = (TextView)itemView.findViewById(R.id.rider);
+			cv = itemView.findViewById(R.id.cv);
+			//rider = (TextView)itemView.findViewById(R.id.rider);
 		}
 	}
 

@@ -26,13 +26,6 @@
         app:layout_constraintVertical_bias="0.954"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewTrip1"
-        android:layout_width="403dp"
-        android:layout_height="97dp"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="186dp" />
-
     <TextView
         android:id="@+id/textViewUpcomingTrips"
         android:layout_width="wrap_content"

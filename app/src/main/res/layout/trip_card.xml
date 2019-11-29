@@ -7,21 +7,69 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cv"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="125dp"
         android:layout_gravity="center"
         card_view:cardCornerRadius="4dp">
 
-        <TextView
-            android:id="@+id/rider"
-            android:layout_width="392dp"
-            android:layout_height="match_parent"
-            android:text="Hello Card" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/textViewStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="MATCHING IN PROGRESS"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="#FF8C00"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTripName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewStatus"
+                android:padding="10dp"
+                android:text="ROSS TO DTW"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTripDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="47dp"
+                android:layout_toRightOf="@id/textViewStatus"
+                android:padding="10dp"
+                android:text="11/3/19"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTripTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewStatus"
+                android:layout_marginLeft="59dp"
+                android:layout_marginTop="12dp"
+                android:layout_toRightOf="@id/textViewTripName"
+                android:padding="10dp"
+                android:text="4:45 PM"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

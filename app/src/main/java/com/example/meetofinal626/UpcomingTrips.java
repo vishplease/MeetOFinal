@@ -17,10 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class UpcomingTrips extends AppCompatActivity implements View.OnClickListener {
 
+    //declaring objects
     FloatingActionButton buttonAddTrip;
     private List<TripRequest> upcomingTrips;
 
@@ -29,17 +31,20 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming_trips);
 
+        //adding the floating add trip button
         buttonAddTrip = findViewById(R.id.buttonAddTrip);
         buttonAddTrip.setOnClickListener(this);
 
-        RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
+        RecyclerView rv = findViewById(R.id.rv);
         rv.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
         upcomingTrips = new ArrayList<>();
-        //upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+        //Angad here - I am having difficulty understanding how firebase UserID and Calendar classes are stored.  So I don't know how to pull it down into this array. Will chat through it with you all later this weekend
+
+        upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
