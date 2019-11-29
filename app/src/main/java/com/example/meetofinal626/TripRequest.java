@@ -8,17 +8,17 @@ import java.util.Calendar;
 import java.util.List;
 
 public class TripRequest {
-    public FirebaseUser riderID;
+    public String riderID;
     public String startLocation, endLocation;
     public Calendar requestedTime;
     public int handBag, carryOn, checkIn;
     public String status;
 
-    public TripRequest(FirebaseUser rider) {
+    public TripRequest(String rider) {
         this.riderID = rider;
     }
 
-    public TripRequest(FirebaseUser riderID,
+    public TripRequest(String riderID,
                        String startLocation,
                        String endLocation,
                        Calendar requestedTime,

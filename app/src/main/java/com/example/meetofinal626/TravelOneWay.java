@@ -141,7 +141,7 @@ public class TravelOneWay extends AppCompatActivity implements
                 //upload data to the database
 
                 //get data and format properly
-                FirebaseUser createRider = currentUser;
+                String createRider = currentUser.getEmail();
                 String createStartLocation = spinnerOrigin.getSelectedItem().toString();
                 String createEndLocation = spinnerDestination.getSelectedItem().toString();
                 Calendar createRequestedTime = combinedCal;
