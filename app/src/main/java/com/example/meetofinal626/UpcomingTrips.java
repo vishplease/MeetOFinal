@@ -11,19 +11,28 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class UpcomingTrips extends AppCompatActivity implements View.OnClickListener {
 
     //declaring objects
     FloatingActionButton buttonAddTrip;
+    TextView textViewStatus, textViewTripName, textViewTripDate, textViewTripTime;
+    EditText editTextEmail;
     private List<TripRequest> upcomingTrips;
 
     @Override
@@ -31,8 +40,13 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming_trips);
 
-        //adding the floating add trip button
+        //connecting objects to the UI
         buttonAddTrip = findViewById(R.id.buttonAddTrip);
+        textViewStatus = findViewById(R.id.textViewStatus);
+        textViewTripName = findViewById(R.id.textViewTripName);
+        textViewTripDate = findViewById(R.id.textViewTripDate);
+        textViewTripTime = findViewById(R.id.textViewTripTime);
+
         buttonAddTrip.setOnClickListener(this);
 
         RecyclerView rv = findViewById(R.id.rv);
@@ -41,10 +55,28 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-        upcomingTrips = new ArrayList<>();
-        //Angad here - I am having difficulty understanding how firebase UserID and Calendar classes are stored.  So I don't know how to pull it down into this array. Will chat through it with you all later this weekend
+        //connecting to the firebase, which has to be On Create
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("MeetOFinal");
 
-        //upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+        String uID = editTextEmail.getText().toString();
+
+        //angad is working on this
+
+        //myRef.orderByChild("email").equalTo(uID).addChildEventLister(new ChildEventListener() {
+
+       // })
+
+
+
+                //converting the calendar into an easier date/time
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+        //Calendar calendar = new GregorianCalendar(2013,1,28,13,24,56);
+
+        //test array for the card view
+        //upcomingTrips = new ArrayList<>();
+
+        //upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", (sdf.format(calendar.getTime())), 3, 1, 2, "Match in Progress"));
         //upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
