@@ -1,6 +1,7 @@
 package com.example.meetofinal626;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,11 +18,12 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -31,7 +33,7 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
     //declaring objects
     FloatingActionButton buttonAddTrip;
-    TextView textViewStatus, textViewTripName, textViewTripDate, textViewTripTime;
+    TextView textViewStatus, textviewTripStart, textViewTripEnd, textViewTripDate, textViewTripTime;
     EditText editTextEmail;
     private List<TripRequest> upcomingTrips;
 
@@ -43,7 +45,8 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         //connecting objects to the UI
         buttonAddTrip = findViewById(R.id.buttonAddTrip);
         textViewStatus = findViewById(R.id.textViewStatus);
-        textViewTripName = findViewById(R.id.textViewTripName);
+        textviewTripStart = findViewById(R.id.textViewTripStart);
+        textViewTripEnd = findViewById(R.id.textViewTripEnd);
         textViewTripDate = findViewById(R.id.textViewTripDate);
         textViewTripTime = findViewById(R.id.textViewTripTime);
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -56,22 +59,56 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-        //connecting to the firebase, which has to be On Create
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("MeetOFinal");
+//        // Read from the database
+//        String userEmail = editTextEmail.getText().toString();
+//
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("triprequests");
+//
+//        myRef.orderByChild("riderID").equalTo(userEmail).addChildEventListener(new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//                TripRequest upcomingtrip = dataSnapshot.getValue(TripRequest.class);
+//
+//                String foundStatus = upcomingtrip.status;
+//                String foundStart = upcomingtrip.startLocation;
+//                String foundEnd = upcomingtrip.endLocation;
+//                //Timestamp foundTime = upcomingtrip.requestedTime;
+//
+//                textViewStatus.setText(foundStatus);
+//                textviewTripStart.setText(foundStart);
+//                textViewTripEnd.setText(foundEnd);
+//
+//
+//
+//            }
+//
+//            @Override
+//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
 
-        //String uID = editTextEmail.getText().toString();
-
-        //angad is working on this
-
-        //myRef.orderByChild("email").equalTo(uID).addChildEventLister(new ChildEventListener() {
-
-       // })
 
 
 
-                //converting the calendar into an easier date/time
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+        //converting the calendar into an easier date/time
         Calendar calendar = new GregorianCalendar(2013,1,28,13,24,56);
 
         //test array for the card view

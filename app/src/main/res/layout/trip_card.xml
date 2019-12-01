@@ -28,11 +28,39 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textViewTripName"
+                android:id="@+id/textViewTripStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewStatus"
-                android:hint="ROSS TO DTW"
+                android:hint="ROSS"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewStatus"
+                android:layout_toRightOf="@id/textViewTripStart"
+                android:text = "TO"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textViewTripEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textViewStatus"
+                android:layout_marginLeft="58dp"
+                android:layout_marginTop="1dp"
+                android:layout_toRightOf="@id/textViewTripStart"
+                android:hint="DTW"
                 android:padding="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textColor="#000000"
@@ -57,11 +85,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewStatus"
-                android:layout_marginLeft="59dp"
-                android:layout_marginTop="12dp"
-                android:layout_toRightOf="@id/textViewTripName"
-                android:padding="10dp"
+                android:layout_marginLeft="176dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/textViewTripStart"
                 android:hint="4:45 PM"
+                android:padding="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textColor="#000000"
                 android:textSize="18sp"
