@@ -53,7 +53,7 @@ public class TravelOneWay extends AppCompatActivity implements
 
     public boolean startLocation, endLocation;
 
-    public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("EST"));
+    public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 
     public int selectedHour, selectedMinute, selectedMonth, selectedDay, selectedYear;
 
@@ -194,16 +194,14 @@ public class TravelOneWay extends AppCompatActivity implements
 
         if (spinnerOrigin.getSelectedItem().toString() == "Ross"){
             spinnerDestination.setSelection(1);
-            //true is Ross, false is DTW
-            //startLocation = true;
-            //endLocation = false;
+            //textViewTravelTime.setText(getResources().getString(R.string.gettodtw));
 
 
         } else if (spinnerOrigin.getSelectedItem().toString() == "DTW") {
             spinnerDestination.setSelection(0);
-            //true is Ross, false is DTW
-            //startLocation = false;
-            //endLocation = true;
+
+            //textViewTravelTime.setText(getResources().getString(R.string.leavefromdtw));
+
 
 
         }
