@@ -144,7 +144,7 @@ public class TravelOneWay extends AppCompatActivity implements
                 String createRider = currentUser.getEmail();
                 String createStartLocation = spinnerOrigin.getSelectedItem().toString();
                 String createEndLocation = spinnerDestination.getSelectedItem().toString();
-                Calendar createRequestedTime = combinedCal;
+                Timestamp createRequestedTime = new Timestamp(combinedCal.getTimeInMillis());
                 Integer createCarryOnCount =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
                 Integer createRollaboardCount =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
                 Integer createCheckInCount =  Integer.parseInt(spinnerCheckIn.getSelectedItem().toString());

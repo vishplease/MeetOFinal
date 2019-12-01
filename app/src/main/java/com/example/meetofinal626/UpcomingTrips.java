@@ -77,10 +77,10 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         //test array for the card view
         upcomingTrips = new ArrayList<>();
 
-        upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", calendar, 3, 1, 2, "Match in Progress"));
-        upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
-        upcomingTrips.add(new TripRequest("Vish", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
-        upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
+        upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", new Timestamp(calendar.getTimeInMillis()), 3, 1, 2, "Match in Progress"));
+        //upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
+        //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
+        //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
         //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
 
