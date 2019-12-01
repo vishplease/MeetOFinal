@@ -46,6 +46,7 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         textViewTripName = findViewById(R.id.textViewTripName);
         textViewTripDate = findViewById(R.id.textViewTripDate);
         textViewTripTime = findViewById(R.id.textViewTripTime);
+        editTextEmail = findViewById(R.id.editTextEmail);
 
         buttonAddTrip.setOnClickListener(this);
 
@@ -59,7 +60,7 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("MeetOFinal");
 
-        String uID = editTextEmail.getText().toString();
+        //String uID = editTextEmail.getText().toString();
 
         //angad is working on this
 
@@ -70,14 +71,16 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
 
                 //converting the calendar into an easier date/time
-        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
-        //Calendar calendar = new GregorianCalendar(2013,1,28,13,24,56);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+        Calendar calendar = new GregorianCalendar(2013,1,28,13,24,56);
 
         //test array for the card view
-        //upcomingTrips = new ArrayList<>();
+        upcomingTrips = new ArrayList<>();
 
-        //upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", (sdf.format(calendar.getTime())), 3, 1, 2, "Match in Progress"));
-        //upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
+        upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", calendar, 3, 1, 2, "Match in Progress"));
+        upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
+        upcomingTrips.add(new TripRequest("Vish", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
+        upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
         //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
         //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
 
