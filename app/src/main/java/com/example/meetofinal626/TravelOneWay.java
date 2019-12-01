@@ -268,6 +268,7 @@ public class TravelOneWay extends AppCompatActivity implements
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+        month = month + 1;
         selectedYear = year;
         selectedMonth = month;
         selectedDay = dayOfMonth;
