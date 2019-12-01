@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/textViewTravelDate"
         android:layout_width="357dp"
-        android:layout_height="27dp"
+        android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:text="@string/travelquestion"
         android:textAlignment="center"
@@ -23,7 +23,7 @@
     <TextView
         android:id="@+id/textViewTravelTime"
         android:layout_width="368dp"
-        android:layout_height="42dp"
+        android:layout_height="50dp"
         android:layout_marginTop="15dp"
         android:text="@string/gettodtw"
         android:textAlignment="center"
@@ -133,11 +133,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="@string/selectdate"
-        android:textSize="20sp"
-        android:onClick="onClick"
         android:clickable="true"
         android:focusable="true"
+        android:hint="@string/selectdate"
+        android:onClick="onClick"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTravelDate" />

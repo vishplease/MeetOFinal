@@ -194,13 +194,13 @@ public class TravelOneWay extends AppCompatActivity implements
 
         if (spinnerOrigin.getSelectedItem().toString() == "Ross"){
             spinnerDestination.setSelection(1);
-            //textViewTravelTime.setText(getResources().getString(R.string.gettodtw));
+            textViewTravelTime.setText(getResources().getString(R.string.gettodtw));
 
 
         } else if (spinnerOrigin.getSelectedItem().toString() == "DTW") {
             spinnerDestination.setSelection(0);
 
-            //textViewTravelTime.setText(getResources().getString(R.string.leavefromdtw));
+            textViewTravelTime.setText(getResources().getString(R.string.leavefromdtw));
 
 
 
