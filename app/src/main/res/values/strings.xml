@@ -27,5 +27,9 @@
 
     <string name="luggagequestion">What luggage are you traveling with?</string>
 
+    <string name="roundtripyesbutton">Yes, continue to add return trip details</string>
+
+    <string name="roundtripnobutton">No, save trip one-way</string>
+
 
 </resources>
