@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -59,53 +60,58 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
 
-//        // Read from the database
-//        String userEmail = editTextEmail.getText().toString();
-//
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("triprequests");
-//
-//        myRef.orderByChild("riderID").equalTo(userEmail).addChildEventListener(new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//                TripRequest upcomingtrip = dataSnapshot.getValue(TripRequest.class);
-//
+        // Read from the database
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("triprequests");
+
+        myRef.orderByChild("riderID").equalTo("vishalch@umich.edu").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                //TripRequest upcomingtrip = dataSnapshot.getValue(TripRequest.class);
+
+                //test for whether or not stuff is being read
+                Log.i("test", dataSnapshot.toString());
+
+                upcomingTrips = new ArrayList<>();
+                
+
+                upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", new Timestamp(calendar.getTimeInMillis()), 3, 1, 2, "Match in Progress"));
+
 //                String foundStatus = upcomingtrip.status;
 //                String foundStart = upcomingtrip.startLocation;
 //                String foundEnd = upcomingtrip.endLocation;
 //                //Timestamp foundTime = upcomingtrip.requestedTime;
-//
+
 //                textViewStatus.setText(foundStatus);
 //                textviewTripStart.setText(foundStart);
 //                textViewTripEnd.setText(foundEnd);
-//
-//
-//
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
 
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         //converting the calendar into an easier date/time
