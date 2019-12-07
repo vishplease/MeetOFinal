@@ -14,7 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHolder>{
-	Context context;
+	public Context context;
+	public TripRequest[] tripRequestArrayAdapter;
+	//public LayoutInflater layoutInflater;
+
+	public TripsAdapter() {
+	}
+
+	public TripsAdapter(TripRequest[] tripRequestArrayAdapter) {
+		this.tripRequestArrayAdapter = tripRequestArrayAdapter;
+		//layoutInflater = c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	}
 
 	@NonNull
 	@Override

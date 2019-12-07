@@ -14,6 +14,8 @@ public class TripRequest {
     public int handBag, carryOn, checkIn;
     public String status;
 
+    public TripRequest() {};
+
     public TripRequest(String rider) {
         this.riderID = rider;
     }
