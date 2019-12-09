@@ -274,8 +274,6 @@ public class TravelOneWay extends AppCompatActivity implements
         }
 
 
-
-
     }
 
     @Override

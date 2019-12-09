@@ -126,7 +126,6 @@ public class TravelReturnTrip extends AppCompatActivity implements
         spinnerOrigin.setSelection(i, true);
 
 
-        
 
 
         spinnerCarryOn.setOnItemSelectedListener(this);
