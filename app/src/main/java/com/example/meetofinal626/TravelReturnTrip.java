@@ -298,6 +298,10 @@ public class TravelReturnTrip extends AppCompatActivity implements
             amPm = "AM";
         }
 
+        if (hour12 == 0){
+            hour12 = 12;
+        }
+
         textViewSelectTime.setText(String.format("%02d:%02d", hour12, minutes) + " " + amPm);
 
         combinedCal.set(Calendar.HOUR_OF_DAY, hourOfDay);
