@@ -67,23 +67,34 @@ public class TravelReturnTrip extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel_return_trip);
 
+        //get bundle
+        Intent intent = getIntent();
+        Bundle departTrip = intent.getExtras();
+
+        createRider = departTrip.getString("createRider");
+        createStartLocation = departTrip.getString("createStartLocation");
+        createEndLocation = departTrip.getString("createEndLocation");
+        createRequestedTime = departTrip.getLong("createRequestedTime");
+        createCarryOnCount =  departTrip.getInt("createCarryOnCount");
+        createRollaboardCount =  departTrip.getInt("createRollaboardCount");
+        createCheckInCount =  departTrip.getInt("createCheckInCount");
+        createStatus = departTrip.getString("createStatus");
+
+        //TextViews
+
         textViewOneWayHeader =findViewById(R.id.textViewOneWayHeader);
-
         textViewTravelDate = findViewById(R.id.textViewTravelDate);
-
         textViewSelectDate = findViewById(R.id.textViewSelectDate);
         textViewSelectDate.setOnClickListener(this);
-
         textViewTo = findViewById(R.id.textViewTo);
-
         textViewTravelTime = findViewById(R.id.textViewTravelTime);
         textViewSelectTime = findViewById(R.id.textViewSelectTime);
         textViewSelectTime.setOnClickListener(this);
-
         textViewLuggageHeader = findViewById(R.id.textViewLuggageHeader);
 
-        spinnerOrigin = findViewById(R.id.spinnerOrigin);
-        spinnerDestination = findViewById(R.id.spinnerDestination);
+        //Spinners
+        spinnerOrigin = findViewById(R.id.spinnerOriginReturn);
+        spinnerDestination = findViewById(R.id.spinnerDestinationReturn);
         spinnerCarryOn = findViewById(R.id.spinnerCarryOn);
         spinnerRollaboard = findViewById(R.id.spinnerRollaboard);
         spinnerCheckIn = findViewById(R.id.spinnerCheckIn);
@@ -91,23 +102,37 @@ public class TravelReturnTrip extends AppCompatActivity implements
         buttonSave = findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(this);
 
+
+
+        List<String> spinnerLocationsRet = new ArrayList<String>();
+        spinnerLocationsRet.add("Ross");
+        spinnerLocationsRet.add("DTW");
+
+        ArrayAdapter<String> spinnerAdapterRet = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerLocationsRet);
+        spinnerAdapterRet.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinnerOrigin.setOnItemSelectedListener(this);
-
-        List<String> spinnerLocations = new ArrayList<String>();
-        spinnerLocations.add("Ross");
-        spinnerLocations.add("DTW");
-
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, spinnerLocations);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerOrigin.setAdapter(spinnerAdapter);
-
         spinnerDestination.setOnItemSelectedListener(this);
-        spinnerDestination.setAdapter(spinnerAdapter);
-        spinnerDestination.setSelection(1);
+
+        spinnerOrigin.setAdapter(spinnerAdapterRet);
+        spinnerDestination.setAdapter(spinnerAdapterRet);
+
+        int i;
+
+        if (createEndLocation.equals("DTW")){
+            i = 1;
+        } else i = 0;
+
+        spinnerOrigin.setSelection(i, true);
+
+
+        
+
 
         spinnerCarryOn.setOnItemSelectedListener(this);
         spinnerRollaboard.setOnItemSelectedListener(this);
         spinnerCheckIn.setOnItemSelectedListener(this);
+
 
         List<String> baggageCount = new ArrayList<>();
         baggageCount.add("0");
@@ -122,17 +147,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
         spinnerRollaboard.setAdapter(spinnerAdapterBags);
         spinnerCheckIn.setAdapter(spinnerAdapterBags);
 
-        Intent intent = getIntent();
-        Bundle departTrip = intent.getExtras();
 
-        createRider = departTrip.getString("createRider");
-        createStartLocation = departTrip.getString("createStartLocation");
-        createEndLocation = departTrip.getString("createEndLocation");
-        createRequestedTime = departTrip.getLong("createRequestedTime");
-        createCarryOnCount =  departTrip.getInt("createCarryOnCount");
-        createRollaboardCount =  departTrip.getInt("createRollaboardCount");
-        createCheckInCount =  departTrip.getInt("createCheckInCount");
-        createStatus = departTrip.getString("createStatus");
     }
 
     @Override
@@ -163,7 +178,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
                 //translate into return tripRequest
 
-                TripRequest createReturnTrip = new TripRequest(createRider,
+                TripRequest createReturnTrip = new TripRequest(createRiderRet,
                         createStartLocationRet,
                         createEndLocationRet,
                         createRequestedTimeRet,
@@ -205,6 +220,8 @@ public class TravelReturnTrip extends AppCompatActivity implements
             //if user is not logged in
 
                 else {
+
+
 
              }
 
@@ -254,17 +271,21 @@ public class TravelReturnTrip extends AppCompatActivity implements
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+
         if (spinnerOrigin.getSelectedItem().toString() == "Ross"){
-            spinnerDestination.setSelection(1);
-            textViewTravelTime.setText(getResources().getString(R.string.gettodtw));
+            spinnerDestination.setSelection(1, true);
+            textViewTravelTime.setText(getResources().getString(R.string.gettodtwret));
 
 
         } else if (spinnerOrigin.getSelectedItem().toString() == "DTW") {
-            spinnerDestination.setSelection(0);
-
-            textViewTravelTime.setText(getResources().getString(R.string.leavefromdtw));
+            spinnerDestination.setSelection(0, true);
+            textViewTravelTime.setText(getResources().getString(R.string.leavefromdtwret));
 
         }
+
+
+
+
 
     }
 

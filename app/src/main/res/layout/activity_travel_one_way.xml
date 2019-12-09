@@ -60,20 +60,20 @@
         android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerOrigin"
-        app:layout_constraintEnd_toStartOf="@+id/spinnerDestination"
-        app:layout_constraintStart_toEndOf="@+id/spinnerOrigin"
-        app:layout_constraintTop_toTopOf="@+id/spinnerOrigin"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerOriginReturn"
+        app:layout_constraintEnd_toStartOf="@+id/spinnerDestinationReturn"
+        app:layout_constraintStart_toEndOf="@+id/spinnerOriginReturn"
+        app:layout_constraintTop_toTopOf="@+id/spinnerOriginReturn"
         app:layout_constraintVertical_bias="1.0" />
 
     <Spinner
-        android:id="@+id/spinnerDestination"
+        android:id="@+id/spinnerDestinationReturn"
         android:layout_width="109dp"
         android:layout_height="46dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/spinnerOrigin"
+        app:layout_constraintBottom_toBottomOf="@+id/spinnerOriginReturn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spinnerOrigin" />
+        app:layout_constraintTop_toTopOf="@+id/spinnerOriginReturn" />
 
     <TextView
         android:id="@+id/textViewOneWayHeader"
@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageViewCarryOn" />
 
     <Spinner
-        android:id="@+id/spinnerOrigin"
+        android:id="@+id/spinnerOriginReturn"
         android:layout_width="109dp"
         android:layout_height="46dp"
         android:layout_marginStart="20dp"
@@ -116,7 +116,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerOrigin" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerOriginReturn" />
 
     <View
         android:id="@+id/divider2"

@@ -71,8 +71,8 @@ public class TravelOneWay extends AppCompatActivity implements
 
         textViewLuggageHeader = findViewById(R.id.textViewLuggageHeader);
 
-        spinnerOrigin = findViewById(R.id.spinnerOrigin);
-        spinnerDestination = findViewById(R.id.spinnerDestination);
+        spinnerOrigin = findViewById(R.id.spinnerOriginReturn);
+        spinnerDestination = findViewById(R.id.spinnerDestinationReturn);
         spinnerCarryOn = findViewById(R.id.spinnerCarryOn);
         spinnerRollaboard = findViewById(R.id.spinnerRollaboard);
         spinnerCheckIn = findViewById(R.id.spinnerCheckIn);
@@ -93,6 +93,8 @@ public class TravelOneWay extends AppCompatActivity implements
 
         spinnerDestination.setOnItemSelectedListener(this);
         spinnerDestination.setAdapter(spinnerAdapter);
+
+
         spinnerDestination.setSelection(1);
 
         spinnerCarryOn.setOnItemSelectedListener(this);
