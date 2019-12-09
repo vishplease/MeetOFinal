@@ -86,7 +86,7 @@ public class TravelRoundTripQuestion extends AppCompatActivity implements View.O
                 TripRequest createTrip = new TripRequest(createRider,
                         createStartLocation,
                         createEndLocation,
-                        createRequestedTimestamp,
+                        createRequestedTimestamp.getTime(),
                         createCarryOnCount,
                         createRollaboardCount,
                         createCheckInCount,

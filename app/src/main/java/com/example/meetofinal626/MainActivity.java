@@ -16,6 +16,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.sql.Timestamp;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -29,11 +33,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button buttonLogIn;
     Button buttonRegister;
 
+    public String createRider;
+    public String createStartLocation;
+    public String createEndLocation;
+    public long createRequestedTime;
+    public Integer createCarryOnCount;
+    public Integer createRollaboardCount;
+    public Integer createCheckInCount;
+    public String createStatus;
+
+    public String createRiderRet;
+    public String createStartLocationRet;
+    public String createEndLocationRet;
+    public long createRequestedTimeRet;
+    public Integer createCarryOnCountRet;
+    public Integer createRollaboardCountRet;
+    public Integer createCheckInCountRet;
+    public String createStatusRet;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //get depart bundle
+        Intent intent = getIntent();
+        Bundle departTrip = intent.getExtras();
+
+        //createRider = departTrip.getString("createRider");
+        createStartLocation = departTrip.getString("createStartLocation");
+        createEndLocation = departTrip.getString("createEndLocation");
+        createRequestedTime = departTrip.getLong("createRequestedTime");
+        createCarryOnCount =  departTrip.getInt("createCarryOnCount");
+        createRollaboardCount =  departTrip.getInt("createRollaboardCount");
+        createCheckInCount =  departTrip.getInt("createCheckInCount");
+        createStatus = departTrip.getString("createStatus");
+
+        //get return bundle
+
+        //createRiderRet = returnTrip.getString("createRider");
+        Bundle returnTrip = intent.getExtras();
+        createStartLocationRet = returnTrip.getString("createStartLocation");
+        createEndLocationRet = returnTrip.getString("createEndLocation");
+        createRequestedTimeRet = returnTrip.getLong("createRequestedTime");
+        createCarryOnCountRet =  returnTrip.getInt("createCarryOnCount");
+        createRollaboardCountRet =  returnTrip.getInt("createRollaboardCount");
+        createCheckInCountRet =  returnTrip.getInt("createCheckInCount");
+        createStatusRet = returnTrip.getString("createStatus");
+
+
 
         textViewHeadline = findViewById(R.id.textViewHeadline);
         editTextEmail = findViewById(R.id.editTextEmail);
@@ -78,8 +128,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
-                            startActivity(intent);
+                            Toast.makeText(MainActivity.this, "Registration Successful. Please sign in to save your trip.", Toast.LENGTH_SHORT).show();
+                            //Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
+                            //startActivity(intent);
                         } else {
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -90,12 +141,57 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    public void loginNewUsers (String email, String password){
+    public void loginNewUsers (final String email, String password){
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference myRef = database.getReference("triprequests");
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+
+                            //get new user's email
+                            createRiderRet = email;
+                            createRider = email;
+
+                            // upload full trip to database
+
+                            //create return tripRequest
+
+                            Timestamp createRequestedTimestampReturn = new Timestamp(createRequestedTimeRet);
+
+                            TripRequest createReturnTrip = new TripRequest(createRiderRet,
+                                    createStartLocationRet,
+                                    createEndLocationRet,
+                                    createRequestedTimestampReturn.getTime(),
+                                    createCarryOnCountRet,
+                                    createRollaboardCountRet,
+                                    createCheckInCountRet,
+                                    createStatusRet);
+
+                            //retrieve depart bundle
+
+                            //convert bundle to depart tripRequest
+
+                            Timestamp createRequestedTimestamp = new Timestamp(createRequestedTime);
+
+                            TripRequest createDepartTrip = new TripRequest(createRider,
+                                    createStartLocation,
+                                    createEndLocation,
+                                    createRequestedTimestamp.getTime(),
+                                    createCarryOnCount,
+                                    createRollaboardCount,
+                                    createCheckInCount,
+                                    createStatus);
+
+                            //push to database
+
+                            myRef.push().setValue(createDepartTrip);
+                            myRef.push().setValue(createReturnTrip);
+
+
                             // Take user to Upcoming Trips Activity when login is successful
                             Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
                             startActivity(intent);

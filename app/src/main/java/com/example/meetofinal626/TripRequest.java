@@ -10,7 +10,7 @@ import java.util.List;
 public class TripRequest {
     public String riderID;
     public String startLocation, endLocation;
-    public Timestamp requestedTime;
+    public long requestedTime;
     public int handBag, carryOn, checkIn;
     public String status;
 
@@ -23,7 +23,7 @@ public class TripRequest {
     public TripRequest(String riderID,
                        String startLocation,
                        String endLocation,
-                       Timestamp requestedTime,
+                       long requestedTime,
                        int handBag,
                        int carryOn,
                        int checkIn,
