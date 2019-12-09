@@ -14,20 +14,12 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.lang.reflect.Array;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -55,7 +47,7 @@ public class TravelOneWay extends AppCompatActivity implements
     Button buttonNext;
 
 
-    public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
+    public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("US/Eastern"));
 
     public int selectedHour, selectedMinute, selectedMonth, selectedDay, selectedYear;
 
@@ -86,7 +78,7 @@ public class TravelOneWay extends AppCompatActivity implements
         spinnerCheckIn = findViewById(R.id.spinnerCheckIn);
 
 
-        buttonNext = findViewById(R.id.buttonNext);
+        buttonNext = findViewById(R.id.buttonSave);
         buttonNext.setOnClickListener(this);
 
         spinnerOrigin.setOnItemSelectedListener(this);

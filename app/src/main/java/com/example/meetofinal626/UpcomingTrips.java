@@ -79,7 +79,7 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Toast.makeText(UpcomingTrips.this, snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(UpcomingTrips.this, snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
                     //TripRequest tripRequestTest = snapshot.getValue(TripRequest.class);
                     //tripRequestList.add(tripRequestTest);
                 }
