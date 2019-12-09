@@ -6,6 +6,7 @@ public class GroupTrip {
     public String[] tripRequests;
     public Timestamp confirmedTime;
 
+
     public GroupTrip() {
     }
 
