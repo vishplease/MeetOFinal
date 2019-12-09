@@ -126,8 +126,6 @@ public class TravelReturnTrip extends AppCompatActivity implements
         spinnerOrigin.setSelection(i, true);
 
 
-
-
         spinnerCarryOn.setOnItemSelectedListener(this);
         spinnerRollaboard.setOnItemSelectedListener(this);
         spinnerCheckIn.setOnItemSelectedListener(this);
@@ -145,6 +143,11 @@ public class TravelReturnTrip extends AppCompatActivity implements
         spinnerCarryOn.setAdapter(spinnerAdapterBags);
         spinnerRollaboard.setAdapter(spinnerAdapterBags);
         spinnerCheckIn.setAdapter(spinnerAdapterBags);
+
+        //"remember" original trip values and preset for convenience
+        spinnerCarryOn.setSelection(createCarryOnCount);
+        spinnerRollaboard.setSelection(createRollaboardCount);
+        spinnerCheckIn.setSelection(createCheckInCount);
 
 
     }
@@ -241,13 +244,13 @@ public class TravelReturnTrip extends AppCompatActivity implements
                     Bundle returnTrip = new Bundle();
 
                     //returnTrip.putString("createRider", createRider);
-                    returnTrip.putString("createStartLocation", createStartLocationRet);
-                    returnTrip.putString("createEndLocation", createEndLocationRet);
-                    returnTrip.putLong("createRequestedTime", createRequestedTimeRet);
-                    returnTrip.putInt("createCarryOnCount", createCarryOnCountRet);
-                    returnTrip.putInt("createRollaboardCount", createRollaboardCountRet);
-                    returnTrip.putInt("createCheckInCount", createCheckInCountRet);
-                    returnTrip.putString("createStatus", createStatusRet);
+                    returnTrip.putString("createStartLocationRet", createStartLocationRet);
+                    returnTrip.putString("createEndLocationRet", createEndLocationRet);
+                    returnTrip.putLong("createRequestedTimeRet", createRequestedTimeRet);
+                    returnTrip.putInt("createCarryOnCountRet", createCarryOnCountRet);
+                    returnTrip.putInt("createRollaboardCountRet", createRollaboardCountRet);
+                    returnTrip.putInt("createCheckInCountRet", createCheckInCountRet);
+                    returnTrip.putString("createStatusRet", createStatusRet);
 
                     // move to next page with bundle
                     Intent intent = new Intent(TravelReturnTrip.this, MainActivity.class);

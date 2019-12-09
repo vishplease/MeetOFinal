@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         Bundle departTrip = intent.getExtras();
 
-        //createRider = departTrip.getString("createRider");
         createStartLocation = departTrip.getString("createStartLocation");
         createEndLocation = departTrip.getString("createEndLocation");
         createRequestedTime = departTrip.getLong("createRequestedTime");
@@ -71,17 +70,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createCheckInCount =  departTrip.getInt("createCheckInCount");
         createStatus = departTrip.getString("createStatus");
 
+
+
         //get return bundle
 
-        //createRiderRet = returnTrip.getString("createRider");
         Bundle returnTrip = intent.getExtras();
-        createStartLocationRet = returnTrip.getString("createStartLocation");
-        createEndLocationRet = returnTrip.getString("createEndLocation");
-        createRequestedTimeRet = returnTrip.getLong("createRequestedTime");
-        createCarryOnCountRet =  returnTrip.getInt("createCarryOnCount");
-        createRollaboardCountRet =  returnTrip.getInt("createRollaboardCount");
-        createCheckInCountRet =  returnTrip.getInt("createCheckInCount");
-        createStatusRet = returnTrip.getString("createStatus");
+        createStartLocationRet = returnTrip.getString("createStartLocationRet");
+        createEndLocationRet = returnTrip.getString("createEndLocationRet");
+        createRequestedTimeRet = returnTrip.getLong("createRequestedTimeRet");
+        createCarryOnCountRet =  returnTrip.getInt("createCarryOnCountRet");
+        createRollaboardCountRet =  returnTrip.getInt("createRollaboardCountRet");
+        createCheckInCountRet =  returnTrip.getInt("createCheckInCountRet");
+        createStatusRet = returnTrip.getString("createStatusRet");
 
 
 
@@ -129,8 +129,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Registration Successful. Please sign in to save your trip.", Toast.LENGTH_SHORT).show();
-                            //Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
-                            //startActivity(intent);
+
                         } else {
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -156,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             createRiderRet = email;
                             createRider = email;
 
-                            // upload full trip to database
 
                             //create return tripRequest
 
@@ -188,8 +186,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             //push to database
 
-                            myRef.push().setValue(createDepartTrip);
-                            myRef.push().setValue(createReturnTrip);
+                            if (createStartLocationRet != null){ //if return trip exists push roundtrip
+                                myRef.push().setValue(createDepartTrip);
+                                myRef.push().setValue(createReturnTrip);
+                            } else { //if oneway then push one trip
+                                myRef.push().setValue(createDepartTrip);
+
+                            }
+
+
 
 
                             // Take user to Upcoming Trips Activity when login is successful
