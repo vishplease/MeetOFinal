@@ -23,8 +23,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.lang.reflect.Array;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -51,7 +54,6 @@ public class TravelOneWay extends AppCompatActivity implements
             spinnerCheckIn;
     Button buttonNext;
 
-    public boolean startLocation, endLocation;
 
     public Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 
@@ -126,54 +128,71 @@ public class TravelOneWay extends AppCompatActivity implements
     @Override
     public void onClick(View v) {
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("triprequests");
-
         if (v == buttonNext){
 
             FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
             //if user is logged in
             if(currentUser != null) {
-                //Toast.makeText(this, "User is logged in", Toast.LENGTH_SHORT).show();
-
-
-                //upload data to the database
+                //bundle with username and send to round trip question
 
                 //get data and format properly
                 String createRider = currentUser.getEmail();
                 String createStartLocation = spinnerOrigin.getSelectedItem().toString();
                 String createEndLocation = spinnerDestination.getSelectedItem().toString();
-                Timestamp createRequestedTime = new Timestamp(combinedCal.getTimeInMillis());
+                //Timestamp createRequestedTime = new Timestamp(combinedCal.getTimeInMillis());
                 Integer createCarryOnCount =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
                 Integer createRollaboardCount =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
                 Integer createCheckInCount =  Integer.parseInt(spinnerCheckIn.getSelectedItem().toString());
                 String createStatus = "Pending";
 
-                //create a new TripRequest
+                //bundle TripRequest data
+                Bundle departTrip = new Bundle();
 
-                TripRequest createTrip = new TripRequest(createRider,
-                        createStartLocation,
-                        createEndLocation,
-                        createRequestedTime,
-                        createCarryOnCount,
-                        createRollaboardCount,
-                        createCheckInCount,
-                        createStatus);
+                departTrip.putString("createRider", createRider);
+                departTrip.putString("createStartLocation", createStartLocation);
+                departTrip.putString("createEndLocation", createEndLocation);
+                departTrip.putLong("createRequestedTime", combinedCal.getTimeInMillis());
+                departTrip.putInt("createCarryOnCount", createCarryOnCount);
+                departTrip.putInt("createRollaboardCount", createRollaboardCount);
+                departTrip.putInt("createCheckInCount", createCheckInCount);
+                departTrip.putString("createStatus", createStatus);
 
-                //push to database
-
-                myRef.push().setValue(createTrip);
-
-                // move to next page
+                // move to next page with bundle
                 Intent intent = new Intent(TravelOneWay.this, TravelRoundTripQuestion.class);
+                intent.putExtras(departTrip);
                 startActivity(intent);
 
             }
-            //if user is not logged in
+            //if user is not logged in then bundle without username
             else {
 
-                //add in code to hold data onto next page until registered and saved
+                //get data and format properly
+                //String createRider = currentUser.getEmail();
+                String createStartLocation = spinnerOrigin.getSelectedItem().toString();
+                String createEndLocation = spinnerDestination.getSelectedItem().toString();
+                Integer createCarryOnCount =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
+                Integer createRollaboardCount =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
+                Integer createCheckInCount =  Integer.parseInt(spinnerCheckIn.getSelectedItem().toString());
+                String createStatus = "Pending";
+
+                //bundle TripRequest data
+                Bundle departTrip = new Bundle();
+                //departTrip.putString("createRider", createRider);
+                departTrip.putString("createStartLocation", createStartLocation);
+                departTrip.putString("createEndLocation", createEndLocation);
+                departTrip.putLong("createRequestedTime", combinedCal.getTimeInMillis());
+                departTrip.putInt("createCarryOnCount", createCarryOnCount);
+                departTrip.putInt("createRollaboardCount", createRollaboardCount);
+                departTrip.putInt("createCheckInCount", createCheckInCount);
+                departTrip.putString("createStatus", createStatus);
+
+                // move to next page with bundle
+                Intent intent = new Intent(TravelOneWay.this, TravelRoundTripQuestion.class);
+                intent.putExtras(departTrip);
+                startActivity(intent);
+
+
             }
 
 
