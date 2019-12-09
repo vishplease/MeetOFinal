@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -67,44 +68,59 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
-        //Read from the database
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        String user_id = mAuth.getCurrentUser().getEmail();
+        //if user is logged in
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("triprequests");
+        if (currentUser != null) {
 
-        final ArrayList upcomingTrips = new ArrayList<>();
+            //Read from the database
 
-        myRef.orderByChild("riderID").equalTo(user_id).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                TripRequest tripRequest = dataSnapshot.getValue(TripRequest.class);
-                upcomingTrips.add(tripRequest);
-                TripsAdapter adapter = new TripsAdapter(upcomingTrips);
-                rv.setAdapter(adapter);
-            }
+            String user_id = mAuth.getCurrentUser().getEmail();
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            final DatabaseReference myRef = database.getReference("triprequests");
 
-            }
+            final ArrayList upcomingTrips = new ArrayList<>();
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+            myRef.orderByChild("riderID").equalTo(user_id).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    TripRequest tripRequest = dataSnapshot.getValue(TripRequest.class);
+                    upcomingTrips.add(tripRequest);
+                    TripsAdapter adapter = new TripsAdapter(upcomingTrips);
+                    rv.setAdapter(adapter);
+                }
 
-            }
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
 
-            }
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
 
-            }
-        });
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            //if user is not logged in
+        } else {
+            Intent intent = new Intent(UpcomingTrips.this, StartPage.class);
+            startActivity(intent);
+
+        }
+
+
     }
 
     @Override

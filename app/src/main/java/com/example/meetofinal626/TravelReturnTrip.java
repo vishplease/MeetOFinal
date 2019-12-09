@@ -163,8 +163,6 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
             if(currentUser != null) {
 
-
-
                 //get data and format properly
                 String createRiderRet = currentUser.getEmail();
                 String createStartLocationRet = spinnerOrigin.getSelectedItem().toString();
@@ -186,7 +184,6 @@ public class TravelReturnTrip extends AppCompatActivity implements
                         createCheckInCountRet,
                         createStatusRet);
 
-
                 //retrieve depart bundle
 
                 //convert bundle to depart tripRequest
@@ -201,7 +198,6 @@ public class TravelReturnTrip extends AppCompatActivity implements
                         createCheckInCount,
                         createStatus);
 
-
                 //push to database
 
                 myRef.push().setValue(createDepartTrip);
@@ -212,17 +208,55 @@ public class TravelReturnTrip extends AppCompatActivity implements
                 startActivity(intent);
                 Toast.makeText(this, "Trip Saved", Toast.LENGTH_SHORT).show();
 
-
-
             }
 
             //if user is not logged in
 
                 else {
 
+                    //rebundle depart trip data without username
+
+                    Bundle departTrip = new Bundle();
+                    //departTrip.putString("createRider", createRider);
+                    departTrip.putString("createStartLocation", createStartLocation);
+                    departTrip.putString("createEndLocation", createEndLocation);
+                    departTrip.putLong("createRequestedTime", createRequestedTime);
+                    departTrip.putInt("createCarryOnCount", createCarryOnCount);
+                    departTrip.putInt("createRollaboardCount", createRollaboardCount);
+                    departTrip.putInt("createCheckInCount", createCheckInCount);
+                    departTrip.putString("createStatus", createStatus);
+
+                    //get return trip data and format properly
+
+                    //String createRiderRet = currentUser.getEmail();
+                    String createStartLocationRet = spinnerOrigin.getSelectedItem().toString();
+                    String createEndLocationRet = spinnerDestination.getSelectedItem().toString();
+                    long createRequestedTimeRet = combinedCal.getTimeInMillis();
+                    Integer createCarryOnCountRet =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
+                    Integer createRollaboardCountRet =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
+                    Integer createCheckInCountRet =  Integer.parseInt(spinnerCheckIn.getSelectedItem().toString());
+                    String createStatusRet = "Pending";
+
+                    //bundle Return Trip  data
+                    Bundle returnTrip = new Bundle();
+
+                    //returnTrip.putString("createRider", createRider);
+                    returnTrip.putString("createStartLocation", createStartLocationRet);
+                    returnTrip.putString("createEndLocation", createEndLocationRet);
+                    returnTrip.putLong("createRequestedTime", createRequestedTimeRet);
+                    returnTrip.putInt("createCarryOnCount", createCarryOnCountRet);
+                    returnTrip.putInt("createRollaboardCount", createRollaboardCountRet);
+                    returnTrip.putInt("createCheckInCount", createCheckInCountRet);
+                    returnTrip.putString("createStatus", createStatusRet);
+
+                    // move to next page with bundle
+                    Intent intent = new Intent(TravelReturnTrip.this, MainActivity.class);
+                    intent.putExtras(returnTrip);
+                    intent.putExtras(departTrip);
+                    startActivity(intent);
 
 
-             }
+                }
 
         } else if (v == textViewSelectDate) {
             showDatePicker();
