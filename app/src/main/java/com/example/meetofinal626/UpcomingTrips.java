@@ -36,7 +36,6 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
     //declaring objects
     FloatingActionButton buttonAddTrip;
-    RecyclerView rv;
     TextView textViewStatus, textviewTripStart, textViewTripEnd, textViewTripDate, textViewTripTime;
     EditText editTextEmail;
     List<TripRequest> tripRequestList = new ArrayList<>();
@@ -58,7 +57,7 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         textViewTripDate = findViewById(R.id.textViewTripDate);
         textViewTripTime = findViewById(R.id.textViewTripTime);
         editTextEmail = findViewById(R.id.editTextEmail);
-        rv = findViewById(R.id.rv);
+        final RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
 
         buttonAddTrip.setOnClickListener(this);
         rv.setHasFixedSize(true);
@@ -68,21 +67,37 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
         mAuth = FirebaseAuth.getInstance();
 
-        // Read from the database
+        //Read from the database
 
-        //String user_id = mAuth.getCurrentUser().getEmail();
+        String user_id = mAuth.getCurrentUser().getEmail();
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference("triprequests");
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        final ArrayList upcomingTrips = new ArrayList<>();
+
+        myRef.orderByChild("riderID").equalTo(user_id).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    //Toast.makeText(UpcomingTrips.this, snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
-                    //TripRequest tripRequestTest = snapshot.getValue(TripRequest.class);
-                    //tripRequestList.add(tripRequestTest);
-                }
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                TripRequest tripRequest = dataSnapshot.getValue(TripRequest.class);
+                upcomingTrips.add(tripRequest);
+                TripsAdapter adapter = new TripsAdapter(upcomingTrips);
+                rv.setAdapter(adapter);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
             }
 
             @Override
@@ -90,83 +105,6 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
             }
         });
-
-
-//        myRef.addChildEventListener(new ChildEventListener() {
-////            @Override
-//           public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-////
-//                TripRequest upcomingtrip = dataSnapshot.getValue(TripRequest.class);
-//
-//                //taking all the firebase trip requests and putting it into a list
-//
-//              for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-//                  Toast.makeText(UpcomingTrips.this, snapshot.getValue().toString(), Toast.LENGTH_SHORT).show();
-//                    //TripRequest tripRequestTest = snapshot.getValue(TripRequest.class);
-//                    //tripRequestList.add(tripRequestTest);
-//                    }
-//
-//              //convert list into an array; array is the size of the list
-//              /*tripRequestArray = new TripRequest[tripRequestList.size()];
-//              tripRequestArray = tripRequestList.toArray(tripRequestArray);
-//
-//              //setting up the array as a recycler view
-//               tripsAdapter = new TripsAdapter(tripRequestArray);
-//               rv.setAdapter(tripsAdapter);*/
-//
-//
-//
-////                String foundStatus = upcomingtrip.status;
-////                String foundStart = upcomingtrip.startLocation;
-////                String foundEnd = upcomingtrip.endLocation;
-////                Timestamp foundTime = upcomingtrip.requestedTime;
-////
-////                textViewStatus.setText(foundStatus);
-////                textviewTripStart.setText(foundStart);
-////                textViewTripEnd.setText(foundEnd);
-////
-////
-////
-//            }
-//
-//            @Override
-//            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-
-
-        //converting the calendar into an easier date/time
-        Calendar calendar = new GregorianCalendar(2013,1,28,13,24,56);
-
-        //test array for the card view
-//        upcomingTrips = new ArrayList<>();
-//
-//        upcomingTrips.add(new TripRequest("Angad", "AA", "DTW", new Timestamp(calendar.getTimeInMillis()), 3, 1, 2, "Match in Progress"));
-        //upcomingTrips.add(new TripRequest("Rahul", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
-        //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
-        //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW",  calendar, 3, 1, 2, "Match in Progress"));
-        //upcomingTrips.add(new TripRequest("Vish", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
-        //upcomingTrips.add(new TripRequest("Hikaru", "AA", "DTW", Timestamp.valueOf("2019-11-28 06:30:00"), 3, 1, 2, false));
-
-
-        //TripsAdapter adapter = new TripsAdapter(upcomingTrips);
-
     }
 
     @Override

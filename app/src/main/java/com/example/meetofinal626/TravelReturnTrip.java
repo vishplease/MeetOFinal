@@ -169,7 +169,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
                 String createRiderRet = currentUser.getEmail();
                 String createStartLocationRet = spinnerOrigin.getSelectedItem().toString();
                 String createEndLocationRet = spinnerDestination.getSelectedItem().toString();
-                Timestamp createRequestedTimeRet = new Timestamp(combinedCal.getTimeInMillis());
+                long createRequestedTimeRet = combinedCal.getTimeInMillis();
                 Integer createCarryOnCountRet =  Integer.parseInt(spinnerCarryOn.getSelectedItem().toString());
                 Integer createRollaboardCountRet =  Integer.parseInt(spinnerRollaboard.getSelectedItem().toString());
                 Integer createCheckInCountRet =  Integer.parseInt(spinnerCheckIn.getSelectedItem().toString());
@@ -195,7 +195,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
                 TripRequest createDepartTrip = new TripRequest(createRider,
                         createStartLocation,
                         createEndLocation,
-                        createRequestedTimestamp,
+                        createRequestedTimestamp.getTime(),
                         createCarryOnCount,
                         createRollaboardCount,
                         createCheckInCount,

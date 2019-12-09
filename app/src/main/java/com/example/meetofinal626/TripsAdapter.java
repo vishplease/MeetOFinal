@@ -11,20 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.Time;
 import java.util.List;
 
 public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHolder>{
 	public Context context;
-	public TripRequest[] tripRequestArrayAdapter;
-	//public LayoutInflater layoutInflater;
-
-	public TripsAdapter() {
-	}
-
-	public TripsAdapter(TripRequest[] tripRequestArrayAdapter) {
-		this.tripRequestArrayAdapter = tripRequestArrayAdapter;
-		//layoutInflater = c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
 
 	@NonNull
 	@Override
@@ -43,7 +34,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 
 	@Override
 	public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
-		//holder.rider.setText(trips.get(position).rider);
+		holder.tripStatus.setText(String.valueOf(new Time(trips.get(position).requestedTime)));
 	}
 
 	@Override
@@ -57,13 +48,12 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 
 	public static class TripViewHolder extends RecyclerView.ViewHolder {
 		CardView cv;
-		//TextView rider;
-		//TextView personAge;
+		TextView tripStatus;
 
 		TripViewHolder(View itemView) {
 			super(itemView);
 			cv = itemView.findViewById(R.id.cv);
-			//rider = (TextView)itemView.findViewById(R.id.rider);
+			tripStatus = (TextView)itemView.findViewById(R.id.textViewStatus);
 		}
 	}
 
