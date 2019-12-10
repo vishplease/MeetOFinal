@@ -132,6 +132,7 @@ public class TravelOneWay extends AppCompatActivity implements
 
                 //get data and format properly
                 String createRider = currentUser.getEmail();
+                String createUser = currentUser.getUid();
                 String createStartLocation = spinnerOrigin.getSelectedItem().toString();
                 String createEndLocation = spinnerDestination.getSelectedItem().toString();
                 //Timestamp createRequestedTime = new Timestamp(combinedCal.getTimeInMillis());
@@ -144,6 +145,7 @@ public class TravelOneWay extends AppCompatActivity implements
                 Bundle departTrip = new Bundle();
 
                 departTrip.putString("createRider", createRider);
+                departTrip.putString("createUser", createUser);
                 departTrip.putString("createStartLocation", createStartLocation);
                 departTrip.putString("createEndLocation", createEndLocation);
                 departTrip.putLong("createRequestedTime", combinedCal.getTimeInMillis());

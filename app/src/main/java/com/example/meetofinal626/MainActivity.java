@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -154,13 +159,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //get new user's email
                             createRiderRet = email;
                             createRider = email;
+                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
                             //create return tripRequest
 
                             Timestamp createRequestedTimestampReturn = new Timestamp(createRequestedTimeRet);
 
-                            TripRequest createReturnTrip = new TripRequest(createRiderRet,
+                            TripRequest createReturnTrip = new TripRequest(createRiderRet, userId,
                                     createStartLocationRet,
                                     createEndLocationRet,
                                     createRequestedTimestampReturn.getTime(),
@@ -175,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             Timestamp createRequestedTimestamp = new Timestamp(createRequestedTime);
 
-                            TripRequest createDepartTrip = new TripRequest(createRider,
+                            TripRequest createDepartTrip = new TripRequest(createRider, userId,
                                     createStartLocation,
                                     createEndLocation,
                                     createRequestedTimestamp.getTime(),
@@ -200,6 +206,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             // Take user to Upcoming Trips Activity when login is successful
                             Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
                             startActivity(intent);
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                            if (!task.isSuccessful()) {
+                                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                                return;
+                                            }
+
+                                            // Get new Instance ID token
+                                            String token = task.getResult().getToken();
+                                            Log.e("My Token",token);
+                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
+                                            dbRef.child(user.getUid()).setValue(token);
+                                        }
+                                    });
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

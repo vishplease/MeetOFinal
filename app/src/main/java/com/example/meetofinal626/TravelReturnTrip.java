@@ -53,7 +53,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
     public int selectedHour, selectedMinute, selectedMonth, selectedDay, selectedYear;
 
-    public String createRider;
+    public String createRider, createUser;
     public String createStartLocation;
     public String createEndLocation;
     public long createRequestedTime;
@@ -72,6 +72,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
         Bundle departTrip = intent.getExtras();
 
         createRider = departTrip.getString("createRider");
+        createUser = departTrip.getString("createUser");
         createStartLocation = departTrip.getString("createStartLocation");
         createEndLocation = departTrip.getString("createEndLocation");
         createRequestedTime = departTrip.getLong("createRequestedTime");
@@ -168,6 +169,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
                 //get data and format properly
                 String createRiderRet = currentUser.getEmail();
+                String createuserIdRet = currentUser.getUid();
                 String createStartLocationRet = spinnerOrigin.getSelectedItem().toString();
                 String createEndLocationRet = spinnerDestination.getSelectedItem().toString();
                 long createRequestedTimeRet = combinedCal.getTimeInMillis();
@@ -178,7 +180,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
                 //translate into return tripRequest
 
-                TripRequest createReturnTrip = new TripRequest(createRiderRet,
+                TripRequest createReturnTrip = new TripRequest(createRiderRet, createuserIdRet,
                         createStartLocationRet,
                         createEndLocationRet,
                         createRequestedTimeRet,
@@ -192,7 +194,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
                 //convert bundle to depart tripRequest
                 Timestamp createRequestedTimestamp = new Timestamp(createRequestedTime);
 
-                TripRequest createDepartTrip = new TripRequest(createRider,
+                TripRequest createDepartTrip = new TripRequest(createRider, createUser,
                         createStartLocation,
                         createEndLocation,
                         createRequestedTimestamp.getTime(),
