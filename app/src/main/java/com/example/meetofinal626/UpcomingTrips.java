@@ -84,14 +84,17 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference myRef = database.getReference("triprequests");
-
+            //create an array
             final ArrayList upcomingTrips = new ArrayList<>();
+
 
             myRef.orderByChild("riderID").equalTo(user_id).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     TripRequest tripRequest = dataSnapshot.getValue(TripRequest.class);
+                    //populating an array with YOUR trip requests
                     upcomingTrips.add(tripRequest);
+                    //new adapter object and sets recycler view adapter to this adapter
                     TripsAdapter adapter = new TripsAdapter(upcomingTrips);
                     rv.setAdapter(adapter);
                 }

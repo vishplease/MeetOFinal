@@ -20,7 +20,11 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 	@NonNull
 	@Override
 	public TripViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+		//inflate layout trip card
 		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_card, parent, false);
+
+		//when i click on it, where do i go - instead of traveloneway it should go to trip summary. Onclick get the group trip ID
 		v.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -32,8 +36,10 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 		return tvh;
 	}
 
+	//rendering of the card, populated with the trip details happens here
 	@Override
 	public void onBindViewHolder(@NonNull TripViewHolder holder, int position) {
+		//gets position of the trip in the recycler view, finds an item on the card (refer to trip card xml)
 		holder.tripStatus.setText(String.valueOf(new Time(trips.get(position).requestedTime)));
 	}
 
@@ -46,6 +52,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 		super.onAttachedToRecyclerView(recyclerView);
 	}
 
+	//
 	public static class TripViewHolder extends RecyclerView.ViewHolder {
 		CardView cv;
 		TextView tripStatus;
@@ -58,7 +65,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 	}
 
 	List<TripRequest> trips;
-
+//taking the Trip array from UpcomingTrips and passing the data along to render the recycler view
 	TripsAdapter(List<TripRequest> trips){
 		this.trips = trips;
 	}
