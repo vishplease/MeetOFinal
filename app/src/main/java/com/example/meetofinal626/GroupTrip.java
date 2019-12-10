@@ -4,14 +4,25 @@ import java.sql.Timestamp;
 
 public class GroupTrip {
     public String[] tripRequests;
-    public Timestamp confirmedTime;
+    public Timestamp timestamp;
+    public Integer carryOn;
+    public Integer checkIn;
+    public Integer handBag;
+    public String riderID;
 
 
-    public GroupTrip() {
+    public GroupTrip(String[] strings, Timestamp timestamp) {
     }
 
-    public GroupTrip(String[] tripRequests, Timestamp confirmedTime) {
+    public GroupTrip(String[] tripRequests, Timestamp confirmedTime, Integer carryOn,Integer checkIn,Integer handBag,String riderID) {
         this.tripRequests = tripRequests;
-        this.confirmedTime = confirmedTime;
+        this.timestamp = confirmedTime;
+        this.carryOn = carryOn;
+        this.checkIn = checkIn;
+        this.handBag = handBag;
+        this.riderID = riderID;
+    }
+    public GroupTrip(){
+
     }
 }
