@@ -35,5 +35,7 @@
 
     <string name="roundtripnobutton">No, save trip one-way</string>
 
+    <string name="matchstatus">MATCH PENDING</string>
+
 
 </resources>
