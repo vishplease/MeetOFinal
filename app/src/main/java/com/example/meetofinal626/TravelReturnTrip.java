@@ -326,9 +326,6 @@ public class TravelReturnTrip extends AppCompatActivity implements
         }
 
 
-
-
-
     }
 
     @Override
