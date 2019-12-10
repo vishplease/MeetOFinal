@@ -194,7 +194,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
                 //convert bundle to depart tripRequest
                 Timestamp createRequestedTimestamp = new Timestamp(createRequestedTime);
 
-                TripRequest createDepartTrip = new TripRequest(createRider, createUser,
+                TripRequest createDepartTrip = new TripRequest(createRider, createuserIdRet,
                         createStartLocation,
                         createEndLocation,
                         createRequestedTimestamp.getTime(),

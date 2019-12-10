@@ -113,7 +113,7 @@ public class TravelRoundTripQuestion extends AppCompatActivity implements View.O
 
             if (v == buttonYes){
                 Bundle departTrip = new Bundle();
-                //departTrip.putString("createRider", createRider);
+                departTrip.putString("createUser", createUser);
                 departTrip.putString("createStartLocation", createStartLocation);
                 departTrip.putString("createEndLocation", createEndLocation);
                 departTrip.putLong("createRequestedTime", createRequestedTime);
