@@ -9,6 +9,7 @@ import java.util.List;
 
 public class TripRequest {
     public String riderID;
+    public String userID;
     public String startLocation, endLocation;
     public long requestedTime;
     public int handBag, carryOn, checkIn;
@@ -21,6 +22,7 @@ public class TripRequest {
     }
 
     public TripRequest(String riderID,
+                       String userID,
                        String startLocation,
                        String endLocation,
                        long requestedTime,
@@ -29,6 +31,7 @@ public class TripRequest {
                        int checkIn,
                        String status) {
         this.riderID = riderID;
+        this.userID = userID;
         this.startLocation = startLocation;
         this.endLocation = endLocation;
         this.requestedTime = requestedTime;

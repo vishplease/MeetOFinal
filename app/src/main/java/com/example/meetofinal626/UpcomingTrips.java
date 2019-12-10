@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,12 +28,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class UpcomingTrips extends AppCompatActivity implements View.OnClickListener {
 
@@ -70,13 +76,11 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        //if user is logged in
+        final String user_id = mAuth.getCurrentUser().getEmail();
 
         if (currentUser != null) {
 
             //Read from the database
-
-            String user_id = mAuth.getCurrentUser().getEmail();
 
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference myRef = database.getReference("triprequests");

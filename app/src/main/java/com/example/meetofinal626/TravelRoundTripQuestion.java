@@ -19,7 +19,7 @@ public class TravelRoundTripQuestion extends AppCompatActivity implements View.O
 
     Button buttonYes, buttonNo;
 
-    public String createRider;
+    public String createRider, createUser;
     public String createStartLocation;
     public String createEndLocation;
     public long createRequestedTime;
@@ -43,6 +43,7 @@ public class TravelRoundTripQuestion extends AppCompatActivity implements View.O
         Bundle departTrip = intent.getExtras();
 
         createRider = departTrip.getString("createRider");
+        createUser = departTrip.getString("createUser");
         createStartLocation = departTrip.getString("createStartLocation");
         createEndLocation = departTrip.getString("createEndLocation");
         createRequestedTime = departTrip.getLong("createRequestedTime");
@@ -67,6 +68,7 @@ public class TravelRoundTripQuestion extends AppCompatActivity implements View.O
             if (v == buttonYes){ //roundtrip - send two bundles with username intent
                 Bundle departTrip = new Bundle();
                 departTrip.putString("createRider", createRider);
+                departTrip.putString("creatUser", createUser);
                 departTrip.putString("createStartLocation", createStartLocation);
                 departTrip.putString("createEndLocation", createEndLocation);
                 departTrip.putLong("createRequestedTime", createRequestedTime);
@@ -83,7 +85,7 @@ public class TravelRoundTripQuestion extends AppCompatActivity implements View.O
 
                 Timestamp createRequestedTimestamp = new Timestamp(createRequestedTime);
 
-                TripRequest createTrip = new TripRequest(createRider,
+                TripRequest createTrip = new TripRequest(createRider, createUser,
                         createStartLocation,
                         createEndLocation,
                         createRequestedTimestamp.getTime(),

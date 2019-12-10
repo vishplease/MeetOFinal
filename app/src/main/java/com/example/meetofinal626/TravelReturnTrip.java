@@ -53,7 +53,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
     public int selectedHour, selectedMinute, selectedMonth, selectedDay, selectedYear;
 
-    public String createRider;
+    public String createRider, createUser;
     public String createStartLocation;
     public String createEndLocation;
     public long createRequestedTime;
@@ -72,6 +72,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
         Bundle departTrip = intent.getExtras();
 
         createRider = departTrip.getString("createRider");
+        createUser = departTrip.getString("createUser");
         createStartLocation = departTrip.getString("createStartLocation");
         createEndLocation = departTrip.getString("createEndLocation");
         createRequestedTime = departTrip.getLong("createRequestedTime");
@@ -126,8 +127,6 @@ public class TravelReturnTrip extends AppCompatActivity implements
         spinnerOrigin.setSelection(i, true);
 
 
-
-
         spinnerCarryOn.setOnItemSelectedListener(this);
         spinnerRollaboard.setOnItemSelectedListener(this);
         spinnerCheckIn.setOnItemSelectedListener(this);
@@ -145,6 +144,11 @@ public class TravelReturnTrip extends AppCompatActivity implements
         spinnerCarryOn.setAdapter(spinnerAdapterBags);
         spinnerRollaboard.setAdapter(spinnerAdapterBags);
         spinnerCheckIn.setAdapter(spinnerAdapterBags);
+
+        //"remember" original trip values and preset for convenience
+        spinnerCarryOn.setSelection(createCarryOnCount);
+        spinnerRollaboard.setSelection(createRollaboardCount);
+        spinnerCheckIn.setSelection(createCheckInCount);
 
 
     }
@@ -165,6 +169,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
                 //get data and format properly
                 String createRiderRet = currentUser.getEmail();
+                String createuserIdRet = currentUser.getUid();
                 String createStartLocationRet = spinnerOrigin.getSelectedItem().toString();
                 String createEndLocationRet = spinnerDestination.getSelectedItem().toString();
                 long createRequestedTimeRet = combinedCal.getTimeInMillis();
@@ -175,7 +180,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
 
                 //translate into return tripRequest
 
-                TripRequest createReturnTrip = new TripRequest(createRiderRet,
+                TripRequest createReturnTrip = new TripRequest(createRiderRet, createuserIdRet,
                         createStartLocationRet,
                         createEndLocationRet,
                         createRequestedTimeRet,
@@ -189,7 +194,7 @@ public class TravelReturnTrip extends AppCompatActivity implements
                 //convert bundle to depart tripRequest
                 Timestamp createRequestedTimestamp = new Timestamp(createRequestedTime);
 
-                TripRequest createDepartTrip = new TripRequest(createRider,
+                TripRequest createDepartTrip = new TripRequest(createRider, createUser,
                         createStartLocation,
                         createEndLocation,
                         createRequestedTimestamp.getTime(),
@@ -241,13 +246,13 @@ public class TravelReturnTrip extends AppCompatActivity implements
                     Bundle returnTrip = new Bundle();
 
                     //returnTrip.putString("createRider", createRider);
-                    returnTrip.putString("createStartLocation", createStartLocationRet);
-                    returnTrip.putString("createEndLocation", createEndLocationRet);
-                    returnTrip.putLong("createRequestedTime", createRequestedTimeRet);
-                    returnTrip.putInt("createCarryOnCount", createCarryOnCountRet);
-                    returnTrip.putInt("createRollaboardCount", createRollaboardCountRet);
-                    returnTrip.putInt("createCheckInCount", createCheckInCountRet);
-                    returnTrip.putString("createStatus", createStatusRet);
+                    returnTrip.putString("createStartLocationRet", createStartLocationRet);
+                    returnTrip.putString("createEndLocationRet", createEndLocationRet);
+                    returnTrip.putLong("createRequestedTimeRet", createRequestedTimeRet);
+                    returnTrip.putInt("createCarryOnCountRet", createCarryOnCountRet);
+                    returnTrip.putInt("createRollaboardCountRet", createRollaboardCountRet);
+                    returnTrip.putInt("createCheckInCountRet", createCheckInCountRet);
+                    returnTrip.putString("createStatusRet", createStatusRet);
 
                     // move to next page with bundle
                     Intent intent = new Intent(TravelReturnTrip.this, MainActivity.class);
@@ -293,6 +298,10 @@ public class TravelReturnTrip extends AppCompatActivity implements
         } else {
             hour12 = hourOfDay;
             amPm = "AM";
+        }
+
+        if (hour12 == 0){
+            hour12 = 12;
         }
 
         textViewSelectTime.setText(String.format("%02d:%02d", hour12, minutes) + " " + amPm);

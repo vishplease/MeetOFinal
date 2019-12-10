@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.sql.Timestamp;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
@@ -62,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = getIntent();
         Bundle departTrip = intent.getExtras();
 
-        //createRider = departTrip.getString("createRider");
         createStartLocation = departTrip.getString("createStartLocation");
         createEndLocation = departTrip.getString("createEndLocation");
         createRequestedTime = departTrip.getLong("createRequestedTime");
@@ -71,17 +75,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         createCheckInCount =  departTrip.getInt("createCheckInCount");
         createStatus = departTrip.getString("createStatus");
 
+
+
         //get return bundle
 
-        //createRiderRet = returnTrip.getString("createRider");
         Bundle returnTrip = intent.getExtras();
-        createStartLocationRet = returnTrip.getString("createStartLocation");
-        createEndLocationRet = returnTrip.getString("createEndLocation");
-        createRequestedTimeRet = returnTrip.getLong("createRequestedTime");
-        createCarryOnCountRet =  returnTrip.getInt("createCarryOnCount");
-        createRollaboardCountRet =  returnTrip.getInt("createRollaboardCount");
-        createCheckInCountRet =  returnTrip.getInt("createCheckInCount");
-        createStatusRet = returnTrip.getString("createStatus");
+        createStartLocationRet = returnTrip.getString("createStartLocationRet");
+        createEndLocationRet = returnTrip.getString("createEndLocationRet");
+        createRequestedTimeRet = returnTrip.getLong("createRequestedTimeRet");
+        createCarryOnCountRet =  returnTrip.getInt("createCarryOnCountRet");
+        createRollaboardCountRet =  returnTrip.getInt("createRollaboardCountRet");
+        createCheckInCountRet =  returnTrip.getInt("createCheckInCountRet");
+        createStatusRet = returnTrip.getString("createStatusRet");
 
 
 
@@ -129,8 +134,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Registration Successful. Please sign in to save your trip.", Toast.LENGTH_SHORT).show();
-                            //Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
-                            //startActivity(intent);
+
                         } else {
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -155,14 +159,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //get new user's email
                             createRiderRet = email;
                             createRider = email;
+                            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                            // upload full trip to database
 
                             //create return tripRequest
 
                             Timestamp createRequestedTimestampReturn = new Timestamp(createRequestedTimeRet);
 
-                            TripRequest createReturnTrip = new TripRequest(createRiderRet,
+                            TripRequest createReturnTrip = new TripRequest(createRiderRet, userId,
                                     createStartLocationRet,
                                     createEndLocationRet,
                                     createRequestedTimestampReturn.getTime(),
@@ -177,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             Timestamp createRequestedTimestamp = new Timestamp(createRequestedTime);
 
-                            TripRequest createDepartTrip = new TripRequest(createRider,
+                            TripRequest createDepartTrip = new TripRequest(createRider, userId,
                                     createStartLocation,
                                     createEndLocation,
                                     createRequestedTimestamp.getTime(),
@@ -188,13 +192,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             //push to database
 
-                            myRef.push().setValue(createDepartTrip);
-                            myRef.push().setValue(createReturnTrip);
+                            if (createStartLocationRet != null){ //if return trip exists push roundtrip
+                                myRef.push().setValue(createDepartTrip);
+                                myRef.push().setValue(createReturnTrip);
+                            } else { //if oneway then push one trip
+                                myRef.push().setValue(createDepartTrip);
+
+                            }
+
+
 
 
                             // Take user to Upcoming Trips Activity when login is successful
                             Intent intent = new Intent(MainActivity.this, UpcomingTrips.class);
                             startActivity(intent);
+                            FirebaseInstanceId.getInstance().getInstanceId()
+                                    .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                                            if (!task.isSuccessful()) {
+                                                Log.w(TAG, "getInstanceId failed", task.getException());
+                                                return;
+                                            }
+
+                                            // Get new Instance ID token
+                                            String token = task.getResult().getToken();
+                                            Log.e("My Token",token);
+                                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                            DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Users");
+                                            dbRef.child(user.getUid()).setValue(token);
+                                        }
+                                    });
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(MainActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
