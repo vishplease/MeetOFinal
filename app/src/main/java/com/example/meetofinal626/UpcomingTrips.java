@@ -34,6 +34,8 @@ import com.google.firebase.iid.InstanceIdResult;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -45,10 +47,15 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
     FloatingActionButton buttonAddTrip;
     TextView textViewStatus, textviewTripStart, textViewTripEnd, textViewTripDate, textViewTripTime;
     EditText editTextEmail;
-    List<TripRequest> tripRequestList = new ArrayList<>();
-    private TripRequest[] tripRequestArray;
-    TripsAdapter tripsAdapter;
 
+    ArrayList<TripRequest> list;
+
+    //List<TripRequest> tripRequestList = new ArrayList<>();
+    //private TripRequest[] tripRequestArray;
+
+    TripsAdapter adapter;
+    DatabaseReference reference;
+    RecyclerView rv;
     FirebaseAuth mAuth;
 
     @Override
@@ -58,19 +65,20 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
         //connecting objects to the UI
         buttonAddTrip = findViewById(R.id.buttonAddTrip);
+        buttonAddTrip.setOnClickListener(this);
         textViewStatus = findViewById(R.id.textViewStatus);
         textviewTripStart = findViewById(R.id.textViewTripStart);
         textViewTripEnd = findViewById(R.id.textViewTripEnd);
         textViewTripDate = findViewById(R.id.textViewTripDate);
         textViewTripTime = findViewById(R.id.textViewTripTime);
         editTextEmail = findViewById(R.id.editTextEmail);
-        final RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
 
-        buttonAddTrip.setOnClickListener(this);
+        rv = findViewById(R.id.rv);
         rv.setHasFixedSize(true);
-
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -81,16 +89,41 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
         if (currentUser != null) {
 
             //Read from the database
+            reference = FirebaseDatabase.getInstance().getReference("triprequests");
 
+            reference.orderByChild("riderID").equalTo(user_id).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    list = new ArrayList<TripRequest>();
+                    for (DataSnapshot dataSnapshot1: dataSnapshot.getChildren()){
+                        TripRequest t = dataSnapshot1.getValue(TripRequest.class);
+                        list.add(t);
+                    }
+
+
+
+                    adapter = new TripsAdapter(UpcomingTrips.this, list);
+                    rv.setAdapter(adapter);
+
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(UpcomingTrips.this, "Hmmm something went wrong", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+/*
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             final DatabaseReference myRef = database.getReference("triprequests");
             //create an array
             final ArrayList upcomingTrips = new ArrayList<>();
 
-
             myRef.orderByChild("riderID").equalTo(user_id).addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
                     TripRequest tripRequest = dataSnapshot.getValue(TripRequest.class);
                     //populating an array with YOUR trip requests
                     upcomingTrips.add(tripRequest);
@@ -119,6 +152,8 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
                 }
             });
+
+ */
 
             //if user is not logged in
         } else {
