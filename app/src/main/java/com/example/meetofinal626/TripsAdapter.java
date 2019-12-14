@@ -56,9 +56,10 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 				textViewTripEnd,
 				textViewTripTime;
 
-		TripViewHolder(View itemView, final OnItemClickListener listener) {
+		TripViewHolder(View itemView, final OnItemClickListener listener, final ArrayList<TripRequest> Triprequests ) {
 			super(itemView);
 			cv = itemView.findViewById(R.id.cv);
+			final ArrayList<TripRequest> tripRequests = Triprequests;
 			textViewStatus = itemView.findViewById(R.id.textViewStatus);
 			textViewTripTime = itemView.findViewById(R.id.textViewTripTime);
 			textViewTripDate = itemView.findViewById(R.id.textViewTripDate);
@@ -73,6 +74,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 						int position = getAdapterPosition();
 						if (position != RecyclerView.NO_POSITION){
 							listener.onItemClick(position);
+							Toast.makeText(view.getContext(), tripRequests.get(position).status + " is clicked", Toast.LENGTH_SHORT).show();
 						}
 					}
 
@@ -108,7 +110,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 
 		View v = LayoutInflater.from(context).inflate(R.layout.trip_card, parent, false);
 
-		TripViewHolder tvh = new TripViewHolder(v, mListener);
+		TripViewHolder tvh = new TripViewHolder(v, mListener, mTriprequests);
 		return tvh;
 	}
 
