@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,18 +24,24 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.Calendar;
 
-public class MatchedTripSummary extends AppCompatActivity {
+public class MatchedTripSummary extends AppCompatActivity implements View.OnClickListener  {
 
     TextView textViewRidingWith, textViewRidingMembers,textViewRidingMembers2;
     TextView textViewTripSummary, textViewLeave, textViewTimeSchedule, textViewLuggage;
-    TextView textViewNumber1, textViewNumber2, textViewNumber3;
+    TextView textViewNumber1, textViewNumber2, textViewNumber3, textViewNumber4, textViewNumber5, textViewNumber6;
     ImageView imageView0, imageView2, imageView4;
     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    Button buttonGoBack;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matched_trip_summary);
+
+        buttonGoBack = findViewById(R.id. buttonGoBack);
+        buttonGoBack.setOnClickListener(this);
 
         textViewRidingMembers = findViewById(R.id.textViewRidingMembers);
         textViewRidingWith = findViewById(R.id.textViewRidingWIth);
@@ -45,6 +53,11 @@ public class MatchedTripSummary extends AppCompatActivity {
         textViewNumber1 = findViewById(R.id.textViewNumber1);
         textViewNumber2 = findViewById(R.id.textViewNumber2);
         textViewNumber3 = findViewById(R.id.textViewNumber3);
+        textViewNumber4 = findViewById(R.id.textViewNumber4);
+        textViewNumber5 = findViewById(R.id.textViewNumber5);
+        textViewNumber6 = findViewById(R.id.textViewNumber6);
+
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference().child("triprequests");
@@ -59,12 +72,27 @@ public class MatchedTripSummary extends AppCompatActivity {
                         GroupTrip foundGroupTrip = snapshot.getValue(GroupTrip.class);
                         String findGroupTrip = foundGroupTrip.riderID;
                         textViewRidingMembers.setText(findGroupTrip);
+                        Integer findLuggage = foundGroupTrip.handBag;
+                        textViewNumber1.setText(String.valueOf(findLuggage));
+                        Integer findLuggage1 = foundGroupTrip.carryOn;
+                        textViewNumber2.setText(String.valueOf(findLuggage1));
+                        Integer findLuggage3 = foundGroupTrip.checkIn;
+                        textViewNumber3.setText(String.valueOf(findLuggage3));
 
-                    } else if (snapshot.getKey().equals("-LvhRaam-ObUAFJ1tqMC")) {
+
+
+
+
+                    } else if (snapshot.getKey().equals("-LvkRun6OwkNP6ZHHTjK")) {
                         GroupTrip foundGroupTrip = snapshot.getValue(GroupTrip.class);
                         String findGroupTrip2 = foundGroupTrip.riderID;
                         textViewRidingMembers2.setText(findGroupTrip2);
-
+                        Integer findLuggage4 = foundGroupTrip.handBag;
+                        textViewNumber4.setText(String.valueOf(findLuggage4));
+                        Integer findLuggage5 = foundGroupTrip.carryOn;
+                        textViewNumber5.setText(String.valueOf(findLuggage5));
+                        Integer findLuggage6 = foundGroupTrip.checkIn;
+                        textViewNumber6.setText(String.valueOf(findLuggage6));
                     }
                     Calendar calendar = Calendar.getInstance();
                     String currentDate = DateFormat.getDateInstance().format(calendar.getTime());
@@ -74,11 +102,22 @@ public class MatchedTripSummary extends AppCompatActivity {
 
 
                 }
+
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (buttonGoBack == view) {
+        Intent mainIntent = new Intent(MatchedTripSummary.this,UpcomingTrips.class);
+        startActivity(mainIntent);
+        }
     }
 }

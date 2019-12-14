@@ -1,12 +1,22 @@
 package com.example.meetofinal626;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 public class ConfirmTrip extends AppCompatActivity implements View.OnClickListener{
     Button buttonBackConfirm, buttonCoRiders, buttonCancelTrip;
@@ -29,7 +39,12 @@ public class ConfirmTrip extends AppCompatActivity implements View.OnClickListen
         textViewConfirmYourTrip = findViewById(R.id.textViewConfirmYourTrip);
         textViewRidingMembers2 = findViewById(R.id.textViewRidingMembers2);
         textViewMustConfirm = findViewById(R.id.textViewMustConfirm);
+
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance().format(calendar.getTime());
         textViewTimeLimit = findViewById(R.id.textViewTimeLimit);
+        textViewTimeLimit.setText(currentDate);
+
 
     }
 
@@ -38,13 +53,8 @@ public class ConfirmTrip extends AppCompatActivity implements View.OnClickListen
 
 
 
-
         if (buttonCoRiders == view) {
-            TextView textView = findViewById(R.id.textViewRidingMembers2);
-            String message = textView.getText().toString();
-
             Intent intent = new Intent(this, MatchedTripSummary.class);
-            intent.putExtra("Extra_Message",message);
             startActivity(intent);
 
 
@@ -55,8 +65,13 @@ public class ConfirmTrip extends AppCompatActivity implements View.OnClickListen
             Intent intent = new Intent(this, UpcomingTrips.class);
             startActivity(intent);
         }
-
-
+        if (buttonBackConfirm == view) {
+            Intent intent = new Intent(ConfirmTrip.this, UpcomingTrips.class);
+            startActivity(intent);
+        }
     }
+
+
+
 }
 

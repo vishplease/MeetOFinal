@@ -3,7 +3,7 @@ package com.example.meetofinal626;
 import java.sql.Timestamp;
 
 public class GroupTrip {
-    public String[] tripRequests;
+    public String tripRequests;
     public Timestamp timestamp;
     public Integer carryOn;
     public Integer checkIn;
@@ -11,10 +11,10 @@ public class GroupTrip {
     public String riderID;
 
 
-    public GroupTrip(String[] strings, Timestamp timestamp) {
+    public GroupTrip(String strings, Timestamp timestamp) {
     }
 
-    public GroupTrip(String[] tripRequests, Timestamp confirmedTime, Integer carryOn,Integer checkIn,Integer handBag,String riderID) {
+    public GroupTrip(String tripRequests, Timestamp confirmedTime, Integer carryOn,Integer checkIn,Integer handBag,String riderID) {
         this.tripRequests = tripRequests;
         this.timestamp = confirmedTime;
         this.carryOn = carryOn;
@@ -26,3 +26,6 @@ public class GroupTrip {
 
     }
 }
+
+
+

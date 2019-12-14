@@ -21,7 +21,7 @@
             android:name=".MatchInProgress"
             android:label="Match in Progress" />
         <activity
-            android:name=".ConfirmTrip"
+            android:name=".StartPage"
             android:label="Confirm Trip" />
         <activity
             android:name=".Chat"
@@ -48,7 +48,7 @@
             android:name=".MainActivity"
             android:label="Sign In" />
         <activity
-            android:name=".StartPage"
+            android:name=".ConfirmTrip"
             android:label="Welcome to MeetO">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
