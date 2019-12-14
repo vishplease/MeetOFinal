@@ -48,20 +48,30 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
     TextView textViewStatus, textviewTripStart, textViewTripEnd, textViewTripDate, textViewTripTime;
     EditText editTextEmail;
 
-    ArrayList<TripRequest> list;
+    public ArrayList<TripRequest> list;
 
-    //List<TripRequest> tripRequestList = new ArrayList<>();
-    //private TripRequest[] tripRequestArray;
 
     TripsAdapter adapter;
     DatabaseReference reference;
     RecyclerView rv;
     FirebaseAuth mAuth;
 
+    public void pendingIntent(){
+        Intent intent = new Intent(UpcomingTrips.this, MatchInProgress.class);
+        startActivity(intent);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upcoming_trips);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        final String user_id = mAuth.getCurrentUser().getEmail();
+
+        if (currentUser != null) {
 
         //connecting objects to the UI
         buttonAddTrip = findViewById(R.id.buttonAddTrip);
@@ -80,14 +90,6 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
 
 
 
-        mAuth = FirebaseAuth.getInstance();
-
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        final String user_id = mAuth.getCurrentUser().getEmail();
-
-        if (currentUser != null) {
-
             //Read from the database
             reference = FirebaseDatabase.getInstance().getReference("triprequests");
 
@@ -101,9 +103,20 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
                     }
 
 
-
                     adapter = new TripsAdapter(UpcomingTrips.this, list);
                     rv.setAdapter(adapter);
+
+                    adapter.setOnItemClickListener(new TripsAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            if (list.get(position).status == "Pending") {
+
+                                pendingIntent();
+
+                            }
+                        }
+                    });
+
 
 
                 }
