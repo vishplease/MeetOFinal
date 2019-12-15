@@ -2,6 +2,7 @@ package com.example.meetofinal626;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHolder>{
-	public Context context;
+	public static Context context;
 	private ArrayList<TripRequest> mTriprequests;
 	private OnItemClickListener mListener;
 
@@ -74,7 +75,64 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 						int position = getAdapterPosition();
 						if (position != RecyclerView.NO_POSITION){
 							listener.onItemClick(position);
-							Toast.makeText(view.getContext(), tripRequests.get(position).status + " is clicked", Toast.LENGTH_SHORT).show();
+
+							TripRequest currentPosition;
+							currentPosition = tripRequests.get(position);
+
+							String createRider = currentPosition.riderID;
+							String createUser = currentPosition.userID;
+							String createStartLocation = currentPosition.startLocation;
+							String createEndLocation = currentPosition.endLocation;
+							Long createRequestedTime = currentPosition.requestedTime;
+							Integer createCarryOnCount = currentPosition.handBag;
+							Integer createRollaboardCount = currentPosition.carryOn;
+							Integer createCheckInCount = currentPosition.checkIn;
+							String createStatus = currentPosition.status;
+
+
+							Bundle tripRequest = new Bundle();
+
+							tripRequest.putString("createRider", createRider);
+							tripRequest.putString("createUser", createUser);
+							tripRequest.putString("createStartLocation", createStartLocation);
+							tripRequest.putString("createEndLocation", createEndLocation);
+							tripRequest.putLong("createRequestedTime", createRequestedTime);
+							tripRequest.putInt("createCarryOnCount", createCarryOnCount);
+							tripRequest.putInt("createRollaboardCount", createRollaboardCount);
+							tripRequest.putInt("createCheckInCount", createCheckInCount);
+							tripRequest.putString("createStatus", createStatus);
+
+
+
+
+							if (currentPosition.status.equals("Pending")){
+
+								Intent intent = new Intent(context, MatchInProgress.class);
+								intent.putExtras(tripRequest);
+								context.startActivity(intent);
+
+
+							} else if (currentPosition.status.equals("No match")) {
+
+								Intent intent = new Intent(context, AlternativeTravel.class);
+								intent.putExtras(tripRequest);
+								context.startActivity(intent);
+
+							} else if (currentPosition.status.equals("Riders found")) {
+
+								Intent intent = new Intent(context, ConfirmTrip.class);
+								intent.putExtras(tripRequest);
+								context.startActivity(intent);
+
+							} else if (currentPosition.status.equals("Trip confirmed")) {
+
+								Intent intent = new Intent(context, MatchedTripSummary.class);
+								intent.putExtras(tripRequest);
+								context.startActivity(intent);
+
+							}
+
+							//Toast.makeText(view.getContext(), tripRequests.get(position).status + " is clicked", Toast.LENGTH_SHORT).show();
 						}
 					}
 
@@ -136,6 +194,12 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 
 		if (tripStatus.equals("Pending")){
 			tripStatus = "MATCH IN PROGRESS";
+		} else if (tripStatus.equals("No match")){
+			tripStatus = "NO MATCH";
+		} else if (tripStatus.equals("Riders found")){
+			tripStatus = "MATCHED - PLEASE CONFIRM";
+		} else if(tripStatus.equals("Trip confirmed")){
+			tripStatus = "TRIP CONFIRMED";
 		}
 
 		//get user email for testing purposes

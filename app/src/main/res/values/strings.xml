@@ -37,5 +37,11 @@
 
     <string name="matchstatus">MATCH PENDING</string>
 
+    <string name="goback">Go Back</string>
+
+    <string name="edittripdetails">Edit Trip Details</string>
+
+    <string name="canceltrip">Cancel Trip</string>
+
 
 </resources>

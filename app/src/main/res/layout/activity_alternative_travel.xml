@@ -20,33 +20,22 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
         android:text="Michigan Flyer Website"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.572"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewBookYourRide"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewBookYourRide" />
 
     <TextView
         android:id="@+id/textViewBookYourRide"
         android:layout_width="301dp"
         android:layout_height="0dp"
-        android:layout_marginTop="140dp"
-        android:text="Book your ride on the Michigan Flyer"
+        android:layout_marginTop="100dp"
+        android:text="Sorry, no matches found. Book your ride on the Michigan Flyer"
+        android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAlternativeTravel" />
-
-    <TextView
-        android:id="@+id/textViewAlternativeTravel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alternative Travel"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.266"
-        app:layout_constraintStart_toEndOf="@+id/buttonBack"
         app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

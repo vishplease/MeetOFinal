@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textViewStatus"
                 android:layout_toRightOf="@id/textViewTripStart"
-                android:text = "TO"
+                android:hint="TO"
                 android:padding="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                 android:textColor="#000000"

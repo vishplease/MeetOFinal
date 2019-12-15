@@ -29,10 +29,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginEnd="92dp"
             android:text="Confirm Trip"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -41,9 +41,9 @@
             android:layout_height="82dp"
             android:layout_marginTop="32dp"
             android:text="Confirm your trip by clicking below"
+            android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.847"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTimeLimit" />
 
@@ -54,7 +54,6 @@
             android:layout_marginStart="16dp"
             android:text="Confirm Trip and Connect with Co-Riders"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.594"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewConfirmYourTrip" />
 
@@ -65,7 +64,6 @@
             android:layout_marginTop="8dp"
             android:text="Cancel Trip"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.583"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonCoRiders" />
 
@@ -75,9 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="You will be riding with:"
+            android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.742"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewConfrimTrip" />
 
@@ -87,9 +85,9 @@
             android:layout_height="58dp"
             android:layout_marginTop="32dp"
             android:text="Vish, Angad, Rahul, Hikaru "
+            android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.713"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewRidingWIth2" />
 
@@ -99,9 +97,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="You must confirm before"
+            android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.672"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewRidingMembers2" />
 
@@ -111,9 +109,9 @@
             android:layout_height="22dp"
             android:layout_marginTop="24dp"
             android:text="Time"
+            android:textAlignment="center"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.618"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewMustConfirm" />
 

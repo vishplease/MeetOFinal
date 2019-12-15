@@ -56,11 +56,6 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
     RecyclerView rv;
     FirebaseAuth mAuth;
 
-    public void pendingIntent(){
-        Intent intent = new Intent(UpcomingTrips.this, MatchInProgress.class);
-        startActivity(intent);
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,15 +102,13 @@ public class UpcomingTrips extends AppCompatActivity implements View.OnClickList
                     rv.setAdapter(adapter);
 
                     adapter.setOnItemClickListener(new TripsAdapter.OnItemClickListener() {
+
                         @Override
                         public void onItemClick(int position) {
-                            if (list.get(position).status == "Pending") {
-
-                                pendingIntent();
-
-                            }
                         }
                     });
+
+
 
 
 
