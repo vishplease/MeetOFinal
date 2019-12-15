@@ -21,7 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class MatchInProgress extends AppCompatActivity implements View.OnClickListener{
-    Button buttonEdit, buttonGoBack, buttonCancel;
+    Button buttonGoBack, buttonCancel;
+    //Button buttonEdit;
     TextView textViewNotYet, TextViewNotify;
 
     public String createRider, createUser;
@@ -55,8 +56,8 @@ public class MatchInProgress extends AppCompatActivity implements View.OnClickLi
         createStatus = tripRequest.getString("createStatus");
 
 
-        buttonEdit = findViewById(R.id.buttonEdit);
-        buttonEdit.setOnClickListener(this);
+        //buttonEdit = findViewById(R.id.buttonEdit);
+        //buttonEdit.setOnClickListener(this);
 
         buttonGoBack = findViewById(R.id.buttonGoBack);
         buttonGoBack.setOnClickListener(this);
@@ -82,9 +83,9 @@ public class MatchInProgress extends AppCompatActivity implements View.OnClickLi
             Intent mainIntent = new Intent(MatchInProgress.this, UpcomingTrips.class);
             startActivity(mainIntent);
         }
-        if (buttonEdit == view) {
+       // if (buttonEdit == view) {
             //Intent mainIntent = new Intent(MatchInProgress.this, TravelOneWay.class);
-        }
+        //}
         if (buttonCancel == view) {
 
             final Long deleteRequestedTime = createRequestedTime;
