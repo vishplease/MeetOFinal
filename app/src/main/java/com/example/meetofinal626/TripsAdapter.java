@@ -112,19 +112,19 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 								context.startActivity(intent);
 
 
-							} else if (currentPosition.status == "No match") {
+							} else if (currentPosition.status.equals("No match")) {
 
 								Intent intent = new Intent(context, AlternativeTravel.class);
 								intent.putExtras(tripRequest);
 								context.startActivity(intent);
 
-							} else if (currentPosition.status == "Riders found") {
+							} else if (currentPosition.status.equals("Riders found")) {
 
 								Intent intent = new Intent(context, ConfirmTrip.class);
 								intent.putExtras(tripRequest);
 								context.startActivity(intent);
 
-							} else if (currentPosition.status == "Trip confirmed") {
+							} else if (currentPosition.status.equals("Trip confirmed")) {
 
 								Intent intent = new Intent(context, MatchedTripSummary.class);
 								intent.putExtras(tripRequest);
@@ -194,6 +194,12 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripViewHold
 
 		if (tripStatus.equals("Pending")){
 			tripStatus = "MATCH IN PROGRESS";
+		} else if (tripStatus.equals("No match")){
+			tripStatus = "NO MATCH";
+		} else if (tripStatus.equals("Riders found")){
+			tripStatus = "MATCHED - PLEASE CONFIRM";
+		} else if(tripStatus.equals("Trip confirmed")){
+			tripStatus = "TRIP CONFIRMED";
 		}
 
 		//get user email for testing purposes

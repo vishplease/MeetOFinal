@@ -29,6 +29,7 @@ public class AlternativeTravel extends AppCompatActivity implements View.OnClick
     public void onClick(View view) {
         if (buttonBack == view) {
             Intent mainIntent = new Intent(AlternativeTravel.this, UpcomingTrips.class);
+            startActivity(mainIntent);
         }
         if (buttonMFWeb == view) {
             WebView webView = new WebView(this);setContentView(webView);
