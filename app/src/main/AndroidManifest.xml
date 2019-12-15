@@ -27,7 +27,7 @@
             android:name=".Chat"
             android:label="Chat" />
         <activity
-            android:name=".MatchedTripSummary"
+            android:name=".StartPage"
             android:label="Trip Summary" />
         <activity
             android:name=".UpcomingTrips"
@@ -48,7 +48,7 @@
             android:name=".MainActivity"
             android:label="Sign In" />
         <activity
-            android:name=".StartPage"
+            android:name=".MatchedTripSummary"
             android:label="Welcome to MeetO">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

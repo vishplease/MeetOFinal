@@ -83,7 +83,7 @@ public class MatchedTripSummary extends AppCompatActivity implements View.OnClic
 
 
 
-                    } else if (snapshot.getKey().equals("-LvkRun6OwkNP6ZHHTjK")) {
+                    } else if (snapshot.getKey().equals("-LvwORwHTEiPWYjc22mH")) {
                         GroupTrip foundGroupTrip = snapshot.getValue(GroupTrip.class);
                         String findGroupTrip2 = foundGroupTrip.riderID;
                         textViewRidingMembers2.setText(findGroupTrip2);
